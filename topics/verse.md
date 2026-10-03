@@ -9,6 +9,9 @@
 | 3588/3532 ambiguous identifier `UI` | local var named like an asset module | rename (`PlayerUI`) |
 | 3512 `no_rollback` not allowed in context | calling a non-transactional fn inside `if (...)` | call first, test the option after |
 | S88 Expected expression, got ")" | indented archetype as call argument | bind to a name first |
+| 3512 `no_rollback` not allowed (localized message) | `Msg<localizes>(L:string):message` called in `OnBeginSimulation`, `<reads>` or inside `option{}` | call it in `OnSimulate()<suspends>`, bind to a local, then `option{Local}` |
+| S88 Expected expression, got ")" (struct) | `transform:` archetype with indented fields as an argument | `transform{Translation := …, Rotation := …, Scale := …}` |
+| 3506 Unknown identifier `editable` | file without `using { /Verse.org/Simulation }` | add the using |
 | 3506 Unknown identifier `Back` | qualified `(/Verse.org/Input/UI:)Back` doesn't resolve | `using { /Verse.org/Input/UI }` then `Back` |
 
 ## Patterns

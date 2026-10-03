@@ -20,4 +20,8 @@ T(S+'StartGame',{})
    "click didn't arrive" from "logic failed".
 7. Restore production settings afterwards and say so.
 
+8. Logic you can't click yourself: add a **self-test device** that drives the logic from Verse and prints a before/after state line
+   (example: `examples/lamp-showroom/verse/lamp_selftest_device.verse`). It proves the logic, not the real button press.
+9. Session start validation needs exactly one Island Settings device; a failed start leaves a blocking "Unable to Play" modal.
+
 Debug options in the daily reward device: `SecondsPerDay`, `ResetProgressOnJoin`, `DebugAutoClaimAfter`, `AutoOpenOnJoin`, `AutoCloseAfter`.

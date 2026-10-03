@@ -66,6 +66,11 @@ Details + evidence live in `topics/`. **If a rule here conflicts with your insti
 - `DeviceToolset.SetDeviceProperty` **cannot set device-reference arrays** (`[]button_device` etc.) → the user links them in Details.
 - `@editable` arrays of `class<concrete>` with defaults work and show in Details.
 - Verse device asset path after build: `/<Project>/_Verse.<Module>-<device_class>`.
+- `SetDeviceProperty` also **rejects single device references** (`round_settings_device`: "is not valid round_settings_device") → Details panel.
+- `SetDeviceProperty` on a `[]string` must keep the array length (changing length errors "ArrayRemove … ambiguous").
+- Island Settings is NOT in `ListDeviceAssets`: place it with `SceneTools.add_to_scene_from_class(actor_type=
+  /CreativeCoreDevices/Device_ExperienceSettings_V2_UEFN.Device_ExperienceSettings_V2_UEFN_C)`.
+- `ObjectTools.set_properties` on creative devices (Island Settings) returned `false` when `values` was passed as an object *(JSON-string form unverified)*.
 
 ## 7. Testing
 - `SessionToolset`: `StartSession` (fails if one is active → `PushChanges`), `StartGame`/`StopGame`, `PushChanges(bVerseOnly)`.
@@ -74,3 +79,21 @@ Details + evidence live in `topics/`. **If a rule here conflicts with your insti
 - Screenshot the client with `PrintWindow` (works when occluded): `scripts/windows/capture_fortnite_window.ps1`.
 - Verse `Print` from the server is not in the client log; ask the user for the editor Output Log lines.
 - Always restore production device settings after testing (test values: short day length, reset on join, auto-claim).
+- `StartSession` fails "Validation failed" when the level has no Island Settings device (`UEFNValidation: Error … 0 Island Settings Devices`).
+- A failed `StartSession` leaves an **"Unable to Play" modal** in the editor that blocks ALL MCP calls until it's closed.
+- `StartSession` can block > 10 min → run it in the background and watch `%LOCALAPPDATA%\UnrealEditorFortnite\Saved\Logs\UnrealEditorFortnite.log`
+  (`Session -> Channel State`, `LogVerse`). Server-side Verse `Print` DOES appear in that editor log as `LogVerse:`.
+- `StopSession` can report `Disconnected` while the toolbar still shows a running game → check `GetSessionStatus` before `StartSession`.
+
+## 8. Scene Graph (details: `topics/scene-graph.md`)
+- **No tool creates prefabs** → the human does Outliner → right-click entity → Create Prefab. Plan the work so this is one early step.
+- `CreateEntity(parentEntity=…)` takes a **local** transform; `SetEntityTransform` is **world**.
+- Basic-shape meshes have **no material property** (editor or Verse) → carry color with lights, or use other meshes.
+- Find parts by component type (`FindDescendantComponents`), never by entity name.
+- `OnBeginSimulation` re-runs on session start and Stop/Start Game → apply initial state there.
+
+## 9. What the agent cannot do (don't burn time)
+- Create/edit prefab assets; link device references; drive the editor UI.
+- Computer use can't find the UEFN window by any name ("UEFN", "Unreal Editor for Fortnite", exe name).
+- Synthetic Win32 input to the editor gets denied by the agent's permission system → ask the human.
+- Python remote execution reports `bRemoteExecution=true` on `239.0.0.1:6766` but never answers; the sandbox has no `unreal` module.
