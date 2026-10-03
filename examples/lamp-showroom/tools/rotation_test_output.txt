@@ -1,0 +1,12 @@
+ROOT -> (-300,-150,384) yaw 45: {'pitch': 0, 'yaw': 45.00000000000002, 'roll': 0}
+  Base         got (-300.0,-150.0,449.0) expected (-300.0,-150.0,449.0) yaw 45.0 err 0.000
+  Bulb         got (-300.0,-150.0,539.0) expected (-300.0,-150.0,539.0) yaw 45.0 err 0.000
+  Switch       got (-275.3,-125.3,429.0) expected (-275.3,-125.3,429.0) yaw 45.0 err 0.000
+  SwitchLever  got (-264.6,-114.6,429.0) expected (-264.6,-114.6,429.0) yaw 45.0 err 0.000
+  RESULT PASS
+ROOT -> (-500,-300,384) yaw 0: {'pitch': 0, 'yaw': 0, 'roll': 0}
+  Base         got (-500.0,-300.0,449.0) expected (-500.0,-300.0,449.0) yaw 0.0 err 0.000
+  Bulb         got (-500.0,-300.0,539.0) expected (-500.0,-300.0,539.0) yaw 0.0 err 0.000
+  Switch       got (-465.0,-300.0,429.0) expected (-465.0,-300.0,429.0) yaw 0.0 err 0.000
+  SwitchLever  got (-450.0,-300.0,429.0) expected (-450.0,-300.0,429.0) yaw 0.0 err 0.000
+  RESULT PASS
