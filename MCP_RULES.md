@@ -100,6 +100,15 @@ Details + evidence live in `topics/`. **If a rule here conflicts with your insti
 - Custom static meshes become `class(mesh_component)` with `@editable var <Slot>:material` per material slot → recolourable;
   `BasicShapes.*` have no slots. Niagara systems become `class(particle_system_component)`.
 
+## 8b. Scene Graph runtime (details: `topics/scene-graph-runtime.md`)
+- Spawn: `E := entity{}; E.AddComponents(array{transform_component{Entity := E}, cube{Entity := E}}); E.SetLocalTransform(T); Parent.AddEntities(array{E})`.
+  **Set the transform BEFORE AddEntities** — otherwise collision stays at the parent origin for one tick (bad queries/events).
+- Verse `vector3`: Forward = UE +X, **Left = UE −Y**, Up = +Z.
+- Per-entity colour: import your own mesh + parameterised material; `set Mesh.<Slot> = M_X{}` and `set M.Color = ...` at runtime.
+  Code using asset classes must sit in the **parent folder of the asset folders** (they're internal modules).
+- Player entities aren't spatial (transform 0,0,0) → follow characters by setting the transform each `PostPhysics` tick.
+- Qualified names `(/Mod:)X` need `using { /Mod }` too; keep old/new SpatialMath bridges in a separate file.
+
 ## 9a. Discovery & tooling (use the CLI: `cli/README.md`)
 - Read `catalog/` before calling a tool you haven't used: every toolset's inputs AND outputs are there.
 - Verse API: `uefn digest <Module>` / `--grep` / `--class`. Project digests exist only while the editor is open;
