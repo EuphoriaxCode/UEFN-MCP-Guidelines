@@ -1,0 +1,4619 @@
+{
+ "/AINavigation/_Verse/VNI/AINavigation.navigation_system_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "navigation_system_component",
+  "secs": 2.0
+ },
+ "/AINavigation/_Verse/VNI/AINavigation.navigation_user_component": {
+  "props": [
+   {
+    "name": "DefaultNavigationQuery",
+    "type": "UCompositeNavigationQuery*",
+    "value": "null",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "navigation_user_component",
+  "secs": 2.01
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.assault_rifle_mesh": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "assault_rifle_mesh",
+  "secs": 1.99
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.fort_held_item_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_held_item_component",
+  "secs": 2.0
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.fort_multi_trace_weapon_component": {
+  "props": [
+   {
+    "name": "BulletsPerShot",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "Damage",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnvironmentalDamageMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "RangeDamageMultiplier",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxRange",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "FireRate",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadTime",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ExpansionRateMultiplierPerShot",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CooldownRateMultiplierOverTime",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "IdleSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MovingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CrouchingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "SlidingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "SprintingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimDownSightSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "RecoilMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimDownSightRecoilMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MagazineCapacity",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShotAmmoCost",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MuzzleOffset",
+    "type": "FSpatialMath_transform",
+    "value": "{\"translation\":{\"forward\":0,\"left\":0,\"up\":0},\"rotation\":{\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}},\"scale\":{\"forward\":1,\"left\":1,\"up\":1}}",
+    "bReadOnly": false
+   },
+   {
+    "name": "MuzzleFlash",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "BulletTracer",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "EjectionPortOffset",
+    "type": "FSpatialMath_transform",
+    "value": "{\"translation\":{\"forward\":0,\"left\":0,\"up\":0},\"rotation\":{\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}},\"scale\":{\"forward\":1,\"left\":1,\"up\":1}}",
+    "bReadOnly": false
+   },
+   {
+    "name": "BulletShells",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "WeaponFireSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "EquipSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimingDownSightsStartSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimingDownSightsEndSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadStartSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadInsertSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadEndSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "OutOfAmmoSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AllowAimDownSightsInAir",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AllowAimDownSightsDuringReload",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_multi_trace_weapon_component",
+  "secs": 2.0
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.fort_trace_weapon_component": {
+  "props": [
+   {
+    "name": "Damage",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnvironmentalDamageMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "RangeDamageMultiplier",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxRange",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "FireRate",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadTime",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ExpansionRateMultiplierPerShot",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CooldownRateMultiplierOverTime",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "IdleSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MovingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CrouchingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "SlidingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "SprintingSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimDownSightSpreadMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "RecoilMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimDownSightRecoilMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MagazineCapacity",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShotAmmoCost",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MuzzleOffset",
+    "type": "FSpatialMath_transform",
+    "value": "{\"translation\":{\"forward\":0,\"left\":0,\"up\":0},\"rotation\":{\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}},\"scale\":{\"forward\":1,\"left\":1,\"up\":1}}",
+    "bReadOnly": false
+   },
+   {
+    "name": "MuzzleFlash",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "BulletTracer",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "EjectionPortOffset",
+    "type": "FSpatialMath_transform",
+    "value": "{\"translation\":{\"forward\":0,\"left\":0,\"up\":0},\"rotation\":{\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}},\"scale\":{\"forward\":1,\"left\":1,\"up\":1}}",
+    "bReadOnly": false
+   },
+   {
+    "name": "BulletShells",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "WeaponFireSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "EquipSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimingDownSightsStartSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AimingDownSightsEndSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadStartSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadInsertSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReloadEndSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "OutOfAmmoSound",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "AllowAimDownSightsInAir",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AllowAimDownSightsDuringReload",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_trace_weapon_component",
+  "secs": 2.0
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.fort_weapon_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/Armory/_Verse/VNI/ArmoryRuntime.fort_weapon_component' is abstract.",
+  "name": "fort_weapon_component",
+  "secs": 1.33
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.pistol_mesh": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "pistol_mesh",
+  "secs": 2.0
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.shotgun_mesh": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "shotgun_mesh",
+  "secs": 2.0
+ },
+ "/Armory/_Verse/VNI/ArmoryRuntime.sub_machine_gun_mesh": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "sub_machine_gun_mesh",
+  "secs": 2.0
+ },
+ "/AuroraEntity/_Verse/VNI/AuroraEntityRuntime.offer_interactable_component": {
+  "props": [
+   {
+    "name": "Offer",
+    "type": "offer*",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "offer_interactable_component",
+  "secs": 2.0
+ },
+ "/CRD_AIPrompt/_Verse/VNI/AIPrompt.persona_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "persona_component",
+  "secs": 2.0
+ },
+ "/DynamicVolume/_Verse/VNI/DynamicVolume.dynamic_volume_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "LinkCode",
+    "type": "Verse::FNativeString",
+    "value": "\"\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "dynamic_volume_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.KeyframedMovement_keyframed_movement_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "KeyframedMovement_keyframed_movement_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.RenderSettings_post_fx_settings_component": {
+  "props": [
+   {
+    "name": "Is Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Scale",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Color",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Sharpen Intensity",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "RenderSettings_post_fx_settings_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.RenderSettings_render_settings_volume_component": {
+  "props": [
+   {
+    "name": "Is Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Priority",
+    "type": "FVerseRational",
+    "value": "{\"numerator\":0,\"denominator\":1}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Blend Radius",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "Blend Weight",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "RenderSettings_render_settings_volume_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.capsule_light_component": {
+  "props": [
+   {
+    "name": "Intensity",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "AttenuationRadius",
+    "type": "TOptional",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceRadius",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceLength",
+    "type": "double",
+    "value": "50",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadows",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ColorFilter",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpecularScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DiffuseScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectGlobalIllumination",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndirectLightingIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "VolumetricScatteringIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastVolumetricShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftBloom",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomScale",
+    "type": "double",
+    "value": "0.20000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomThreshold",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomMaxBrightness",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomTint",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionMaterial",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionScale",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":1024,\"left\":1024,\"up\":1024}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionFadeDistance",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionDisabledBrightness",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Profile Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Use IES Intensity",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Intensity Scale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "capsule_light_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.damageable_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "damageable_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.decal_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "decal_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.directional_light_component": {
+  "props": [
+   {
+    "name": "Illuminance",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "Source Angle Degrees",
+    "type": "double",
+    "value": "0.53569999999999995",
+    "bReadOnly": false
+   },
+   {
+    "name": "DynamicShadowDistance",
+    "type": "double",
+    "value": "40000",
+    "bReadOnly": false
+   },
+   {
+    "name": "NumDynamicShadowCascades",
+    "type": "int64",
+    "value": "4",
+    "bReadOnly": false
+   },
+   {
+    "name": "CascadeDistributionExponent",
+    "type": "double",
+    "value": "3",
+    "bReadOnly": false
+   },
+   {
+    "name": "CascadeTransitionFraction",
+    "type": "double",
+    "value": "0.10000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "CascadeDistanceFadeoutFraction",
+    "type": "double",
+    "value": "0.10000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarShadowCascadeCount",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarShadowDistance",
+    "type": "double",
+    "value": "30000",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftOcclusion",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "OcclusionMaskDarkness",
+    "type": "double",
+    "value": "0.050000000000000003",
+    "bReadOnly": false
+   },
+   {
+    "name": "OcclusionDepthRange",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadows",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ColorFilter",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpecularScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DiffuseScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectGlobalIllumination",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndirectLightingIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "VolumetricScatteringIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastVolumetricShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftBloom",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomScale",
+    "type": "double",
+    "value": "0.20000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomThreshold",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomMaxBrightness",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomTint",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionMaterial",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionScale",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":1024,\"left\":1024,\"up\":1024}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionFadeDistance",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionDisabledBrightness",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Profile Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Use IES Intensity",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Intensity Scale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "directional_light_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.light_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/EntityFramework/_Verse/VNI/Component.light_component' is abstract.",
+  "name": "light_component",
+  "secs": 1.33
+ },
+ "/EntityFramework/_Verse/VNI/Component.map_ready_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "map_ready_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.mesh_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "mesh_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.network_physics_settings_component": {
+  "props": [
+   {
+    "name": "NetworkedPhysicsSettingsData",
+    "type": "Assets_network_physics_settings_data*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_2100468023.network_physics_settings_component_0.__verse_0x4A1C1E7B_NetworkedPhysicsSettingsData\"}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "network_physics_settings_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.particle_system_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AutoPlay",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AutoPlayInEditor",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TickPostPhysicsInternal",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "particle_system_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.physics_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "physics_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.physics_replication_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "physics_replication_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.physics_scene_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "physics_scene_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.player_primitive_data_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "player_primitive_data_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.possessable_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "possessable_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.possessor_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "possessor_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.presentation_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "presentation_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.rect_light_component": {
+  "props": [
+   {
+    "name": "Intensity",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "AttenuationRadius",
+    "type": "TOptional",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceWidth",
+    "type": "double",
+    "value": "64",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceHeight",
+    "type": "double",
+    "value": "64",
+    "bReadOnly": false
+   },
+   {
+    "name": "BarnDoorAngleDegrees",
+    "type": "double",
+    "value": "88",
+    "bReadOnly": false
+   },
+   {
+    "name": "BarnDoorLength",
+    "type": "double",
+    "value": "20",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadows",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ColorFilter",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpecularScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DiffuseScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectGlobalIllumination",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndirectLightingIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "VolumetricScatteringIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastVolumetricShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftBloom",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomScale",
+    "type": "double",
+    "value": "0.20000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomThreshold",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomMaxBrightness",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomTint",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionMaterial",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionScale",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":1024,\"left\":1024,\"up\":1024}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionFadeDistance",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionDisabledBrightness",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Profile Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Use IES Intensity",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Intensity Scale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "rect_light_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.rigid_body_component": {
+  "props": [
+   {
+    "name": "Dynamic",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "Mass",
+    "type": "double",
+    "value": "983.03997800000002",
+    "bReadOnly": false
+   },
+   {
+    "name": "GravityGroupIndex",
+    "type": "int64",
+    "value": "2",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxAngularVelocity",
+    "type": "double",
+    "value": "6",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "rigid_body_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.sound_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/EntityFramework/_Verse/VNI/Component.sound_component' is abstract.",
+  "name": "sound_component",
+  "secs": 1.33
+ },
+ "/EntityFramework/_Verse/VNI/Component.sphere_light_component": {
+  "props": [
+   {
+    "name": "Intensity",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "AttenuationRadius",
+    "type": "TOptional",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceRadius",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "UseInverseSquaredFalloff",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFalloffExponent",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadows",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ColorFilter",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpecularScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DiffuseScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectGlobalIllumination",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndirectLightingIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "VolumetricScatteringIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastVolumetricShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftBloom",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomScale",
+    "type": "double",
+    "value": "0.20000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomThreshold",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomMaxBrightness",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomTint",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionMaterial",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionScale",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":1024,\"left\":1024,\"up\":1024}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionFadeDistance",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionDisabledBrightness",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Profile Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Use IES Intensity",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Intensity Scale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "sphere_light_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.spot_light_component": {
+  "props": [
+   {
+    "name": "Intensity",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "AttenuationRadius",
+    "type": "TOptional",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "SourceRadius",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "InnerConeAngleDegrees",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "OuterConeAngleDegrees",
+    "type": "double",
+    "value": "44",
+    "bReadOnly": false
+   },
+   {
+    "name": "UseInverseSquaredFalloff",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFalloffExponent",
+    "type": "double",
+    "value": "8",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadows",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ColorFilter",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpecularScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DiffuseScale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectGlobalIllumination",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndirectLightingIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "VolumetricScatteringIntensity",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastVolumetricShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "EnableLightShaftBloom",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomScale",
+    "type": "double",
+    "value": "0.20000000000000001",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomThreshold",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomMaxBrightness",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "BloomTint",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionMaterial",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionScale",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":1024,\"left\":1024,\"up\":1024}",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionFadeDistance",
+    "type": "double",
+    "value": "100000",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightFunctionDisabledBrightness",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Profile Texture",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Use IES Intensity",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "IES Intensity Scale",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "spot_light_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Component.text_display_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Message",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityFramework/_Verse/VNI/Component.Default___Root:__verse_0x41502826_EmptyMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Font",
+    "type": "Assets_font*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1814400869.text_display_component_0.__verse_0x70A2AEEA_Font\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Color",
+    "type": "FColors_color",
+    "value": "{\"r\":1,\"g\":1,\"b\":1}",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleDistance",
+    "type": "Ffloat_range",
+    "value": "{\"minimum\":100,\"maximum\":1000}",
+    "bReadOnly": false
+   },
+   {
+    "name": "FadeInTime",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "FadeOutTime",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "text_display_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.basic_stackable_component": {
+  "props": [
+   {
+    "name": "split_prefab_type",
+    "type": "UClass*",
+    "value": "{\"refPath\":\"/EntityFramework/_Verse/VNI/Entity.entity\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "StackSize",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxStackSize",
+    "type": "TOptional",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "basic_stackable_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.content_scope_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "content_scope_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.icon_component": {
+  "props": [
+   {
+    "name": "Icon",
+    "type": "Assets_texture*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1499031878.icon_component_0.__verse_0x7AD849F3_IconPrivate\"}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "icon_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.rarity_component": {
+  "props": [
+   {
+    "name": "Rarity",
+    "type": "rarity*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1843041785.rarity_component_0.__verse_0x4FECCAB7_RarityPrivate\"}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "rarity_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.replication_component": {
+  "props": [
+   {
+    "name": "EnableReplication",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AlwaysRelevant",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "NetCullDistance",
+    "type": "double",
+    "value": "15000",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "replication_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.stackable_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/EntityFramework/_Verse/VNI/Entity.stackable_component' is abstract.",
+  "name": "stackable_component",
+  "secs": 1.33
+ },
+ "/EntityFramework/_Verse/VNI/Entity.tag_component": {
+  "props": [
+   {
+    "name": "Tags",
+    "type": "FVerseTagInstanceContainer",
+    "value": "{\"internalTags\":{}}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "tag_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.tag_query_manager_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "tag_query_manager_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/Entity.transform_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: A component of class '/EntityFramework/_Verse/VNI/Entity.transform_component' already exists at '/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1757032660.transform_component_0'.",
+  "name": "transform_component",
+  "secs": 1.33
+ },
+ "/EntityFramework/_Verse/VNI/EntityRegistry.entity_registry_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "entity_registry_component",
+  "secs": 2.0
+ },
+ "/EntityFramework/_Verse/VNI/EntityStreaming.streaming_component": {
+  "props": [
+   {
+    "name": "EntityStreamingPolicy",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "ChildrenStreamingPolicy",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "StreamingDistance",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "streaming_component",
+  "secs": 2.0
+ },
+ "/EntityFrameworkFortnite/_Verse/VNI/BridgeComponent.bridge_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "bridge_component",
+  "secs": 2.0
+ },
+ "/EntityInteract/_Verse/VNI/EntityInteract.basic_interactable_component": {
+  "props": [
+   {
+    "name": "CanInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x3BA27C8E_DefaultCanInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "CannotInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x7070DA31_DefaultCannotInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Cooldown",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "CooldownPerAgent",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "SuccessLimit",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "InteractableDuration",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "basic_interactable_component",
+  "secs": 2.0
+ },
+ "/EntityInteract/_Verse/VNI/EntityInteract.interactable_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "interactable_component",
+  "secs": 2.0
+ },
+ "/FNE_Conversation/_Verse/VNI/FNE_ConversationRuntime.FNECon_conversation_component": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShowNameWhenNearby",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShowIndicatorBubble",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "IndicatorBubbleRange",
+    "type": "double",
+    "value": "500",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShowConversationText",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "ConversationDatabase",
+    "type": "FNECon_conversation_database*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1405686386.FNECon_conversation_component_0.__verse_0x2AFE2AC7_ConversationDatabase\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaximumParticipatingAgents",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "FNECon_conversation_component",
+  "secs": 2.0
+ },
+ "/HiredGuardCommands/_Verse/VNI/HiredGuardCommands.HiredGuardCommands_follower_actions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "HiredGuardCommands_follower_actions_component",
+  "secs": 2.0
+ },
+ "/HiredGuardCommands/_Verse/VNI/HiredGuardCommands.HiredGuardCommands_ping_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "HiredGuardCommands_ping_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_build_hotbar_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_br_inventory_build_hotbar_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_harvest_tool_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_br_inventory_harvest_tool_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_legacy_quickbar_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_legacy_quickbar_component' is abstract.",
+  "name": "fort_br_inventory_legacy_quickbar_component",
+  "secs": 1.33
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_trap_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_br_inventory_trap_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_br_inventory_weapon_hotbar_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_br_inventory_weapon_hotbar_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_ammo_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_ammo_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_build_hotbar_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_build_hotbar_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_collectibles_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_collectibles_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_currencies_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_currencies_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_edit_mode_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_edit_mode_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_harvest_tool_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_harvest_tool_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_legacy_quickbar_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_legacy_quickbar_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_resources_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_resources_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_trap_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_trap_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_inventory_weapon_hotbar_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_inventory_weapon_hotbar_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_item_owner_pose_modifier_component": {
+  "props": [
+   {
+    "name": "EquippedPose",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_item_owner_pose_modifier_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_item_pickup_interactable_component": {
+  "props": [
+   {
+    "name": "CanInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x3BA27C8E_DefaultCanInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "CannotInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x7070DA31_DefaultCannotInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Cooldown",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "CooldownPerAgent",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "SuccessLimit",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "InteractableDuration",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_item_pickup_interactable_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.fort_npc_inventory_weapon_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_npc_inventory_weapon_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationRuntime.item_attributes_component": {
+  "props": [
+   {
+    "name": "CurrentDurability",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxDurability",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "item_attributes_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationVerseUI.inventory_item_view_model_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "inventory_item_view_model_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationVerseUI.inventory_ui_action_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "inventory_ui_action_component",
+  "secs": 2.0
+ },
+ "/Itemization/_Verse/VNI/ItemizationVerseUI.inventory_view_model_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "inventory_view_model_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.inventory_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "inventory_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.inventory_initialization_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "inventory_initialization_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.item_ability_component": {
+  "props": [
+   {
+    "name": "ItemAbilities",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "item_ability_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.item_attach_component": {
+  "props": [
+   {
+    "name": "Attachments",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "item_attach_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.item_component": {
+  "props": [
+   {
+    "name": "Categories",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "item_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.item_owner_pose_modifier_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "item_owner_pose_modifier_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.item_slot_size_component": {
+  "props": [
+   {
+    "name": "SlotSize",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "item_slot_size_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.loot_component": {
+  "props": [
+   {
+    "name": "Items",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "LootPools",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "loot_component",
+  "secs": 2.0
+ },
+ "/ItemizationCore/_Verse/VNI/ItemizationCoreRuntime.native_item_stackable_component": {
+  "props": [
+   {
+    "name": "StackSize",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxStackSize",
+    "type": "TOptional",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "native_item_stackable_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.modular_vehicle_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "modular_vehicle_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.modular_vehicle_input_component": {
+  "props": [
+   {
+    "name": "AutoRegisterInput",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "modular_vehicle_input_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_aerofoil_component": {
+  "props": [
+   {
+    "name": "Offset",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":0,\"up\":0}",
+    "bReadOnly": false
+   },
+   {
+    "name": "ForceAxis",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":0,\"up\":1}",
+    "bReadOnly": false
+   },
+   {
+    "name": "ControlRotationAxis",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":1,\"up\":0}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Area",
+    "type": "double",
+    "value": "6",
+    "bReadOnly": false
+   },
+   {
+    "name": "Camber",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxControlAngle",
+    "type": "double",
+    "value": "30",
+    "bReadOnly": false
+   },
+   {
+    "name": "StallAngle",
+    "type": "double",
+    "value": "20",
+    "bReadOnly": false
+   },
+   {
+    "name": "Type",
+    "type": "int64",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "LiftMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "DragMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   },
+   {
+    "name": "AnimationMagnitudeMultiplier",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_aerofoil_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_clutch_component": {
+  "props": [
+   {
+    "name": "ClutchStrength",
+    "type": "double",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_clutch_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_engine_component": {
+  "props": [
+   {
+    "name": "MaxTorque",
+    "type": "double",
+    "value": "200",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxRPM",
+    "type": "int64",
+    "value": "5000",
+    "bReadOnly": false
+   },
+   {
+    "name": "EngineIdleRPM",
+    "type": "int64",
+    "value": "1200",
+    "bReadOnly": false
+   },
+   {
+    "name": "EngineBrakeEffect",
+    "type": "double",
+    "value": "150",
+    "bReadOnly": false
+   },
+   {
+    "name": "EngineInertia",
+    "type": "double",
+    "value": "1000",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_engine_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_sim_base_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "vehicle_sim_base_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_suspension_component": {
+  "props": [
+   {
+    "name": "SuspensionAxis",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":0,\"up\":-1}",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxRaise",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxDrop",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpringRate",
+    "type": "double",
+    "value": "200",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpringPreload",
+    "type": "double",
+    "value": "50",
+    "bReadOnly": false
+   },
+   {
+    "name": "SpringDamping",
+    "type": "double",
+    "value": "0.40000000000000002",
+    "bReadOnly": false
+   },
+   {
+    "name": "SuspensionForceEffect",
+    "type": "double",
+    "value": "100",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_suspension_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_thruster_component": {
+  "props": [
+   {
+    "name": "MaxThrustForce",
+    "type": "double",
+    "value": "1000",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_thruster_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_transmission_component": {
+  "props": [
+   {
+    "name": "ForwardRatios",
+    "type": "TArray",
+    "value": "[1]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReverseRatios",
+    "type": "TArray",
+    "value": "[1]",
+    "bReadOnly": false
+   },
+   {
+    "name": "FinalDriveRatio",
+    "type": "double",
+    "value": "4",
+    "bReadOnly": false
+   },
+   {
+    "name": "ChangeUpRPM",
+    "type": "int64",
+    "value": "4500",
+    "bReadOnly": false
+   },
+   {
+    "name": "ChangeDownRPM",
+    "type": "int64",
+    "value": "1600",
+    "bReadOnly": false
+   },
+   {
+    "name": "GearChangeTime",
+    "type": "double",
+    "value": "0.5",
+    "bReadOnly": false
+   },
+   {
+    "name": "TransmissionEfficiency",
+    "type": "double",
+    "value": "0.90000000000000002",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_transmission_component",
+  "secs": 2.0
+ },
+ "/ModularVehicle/_Verse/VNI/VehicleComponent.vehicle_wheel_component": {
+  "props": [
+   {
+    "name": "WheelRadius",
+    "type": "double",
+    "value": "30",
+    "bReadOnly": false
+   },
+   {
+    "name": "WheelWidth",
+    "type": "double",
+    "value": "20",
+    "bReadOnly": false
+   },
+   {
+    "name": "FrictionMultiplier",
+    "type": "double",
+    "value": "2",
+    "bReadOnly": false
+   },
+   {
+    "name": "CorneringStiffness",
+    "type": "double",
+    "value": "10000",
+    "bReadOnly": false
+   },
+   {
+    "name": "SlipAngleLimit",
+    "type": "double",
+    "value": "10",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxBrakeTorque",
+    "type": "double",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "bHandbrakeEnabled",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "HandbrakeTorque",
+    "type": "double",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "bSteeringEnabled",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "MaxSteeringAngle",
+    "type": "double",
+    "value": "30",
+    "bReadOnly": false
+   },
+   {
+    "name": "bABSEnabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "bTractionControlEnabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AxisType",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReverseDirection",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "vehicle_wheel_component",
+  "secs": 2.0
+ },
+ "/NewtonTelekineticon/_Verse/VNI/NewtonTelekineticonRuntime.telekineticon_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "telekineticon_component",
+  "secs": 2.0
+ },
+ "/PlayerCompanion/_Verse/VNI/PlayerCompanionRuntime.AI_equipped_sidekick_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_equipped_sidekick_component",
+  "secs": 2.0
+ },
+ "/PlayerCompanion/_Verse/VNI/PlayerCompanionRuntime.AI_spark_mode_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_spark_mode_component",
+  "secs": 2.0
+ },
+ "/ProgressionCore/_Verse/VNI/ProgressionCore.Progression_contextual_reactions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_contextual_reactions_component",
+  "secs": 2.0
+ },
+ "/QuestFramework/_Verse/VNI/Quest.Progression_epic_quest_participant_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_epic_quest_participant_component",
+  "secs": 2.0
+ },
+ "/QuestFramework/_Verse/VNI/Quest.Progression_quest_granter_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_quest_granter_component",
+  "secs": 2.0
+ },
+ "/QuestFramework/_Verse/VNI/Quest.Progression_quest_manager_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_quest_manager_component",
+  "secs": 2.0
+ },
+ "/QuestFramework/_Verse/VNI/Quest.Progression_quest_participant_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_quest_participant_component",
+  "secs": 2.0
+ },
+ "/VerbFramework/_Verse/VNI/Verb.Progression_verb_router_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Progression_verb_router_component",
+  "secs": 2.0
+ },
+ "/VerseAbilities/_Verse/VNI/VerseAbilities.ability_effect_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "ability_effect_component",
+  "secs": 2.0
+ },
+ "/VerseCamera/_Verse/VNI/VerseCamera.camera_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/VerseCamera/_Verse/VNI/VerseCamera.camera_component' is abstract.",
+  "name": "camera_component",
+  "secs": 1.33
+ },
+ "/VerseCamera/_Verse/VNI/VerseCamera.camera_director_component": {
+  "props": [
+   {
+    "name": "CameraModifiers",
+    "type": "Verse_modifier_stack*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1277233578.camera_director_component_0.__verse_0x2A50779A_CameraModifiers\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "NearClippingPlaneDistance",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarClippingPlaneDistance",
+    "type": "double",
+    "value": "inf",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "camera_director_component",
+  "secs": 2.0
+ },
+ "/VerseCamera/_Verse/VNI/VerseCamera.orthographic_camera_component": {
+  "props": [
+   {
+    "name": "OrthographicProjectionWidth",
+    "type": "double",
+    "value": "1000",
+    "bReadOnly": false
+   },
+   {
+    "name": "CameraModifiers",
+    "type": "Verse_modifier_stack*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1974047501.orthographic_camera_component_0.__verse_0x2A50779A_CameraModifiers\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "NearClippingPlaneDistance",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarClippingPlaneDistance",
+    "type": "double",
+    "value": "inf",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "orthographic_camera_component",
+  "secs": 2.0
+ },
+ "/VerseCamera/_Verse/VNI/VerseCamera.perspective_camera_component": {
+  "props": [
+   {
+    "name": "FieldOfViewDegrees",
+    "type": "double",
+    "value": "90",
+    "bReadOnly": false
+   },
+   {
+    "name": "CameraModifiers",
+    "type": "Verse_modifier_stack*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1661009684.perspective_camera_component_0.__verse_0x2A50779A_CameraModifiers\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "NearClippingPlaneDistance",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarClippingPlaneDistance",
+    "type": "double",
+    "value": "inf",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "perspective_camera_component",
+  "secs": 2.0
+ },
+ "/VerseCamera/_Verse/VNI/VerseCamera.physical_camera_component": {
+  "props": [
+   {
+    "name": "Body",
+    "type": "camera_body*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1378567535.physical_camera_component_0.__verse_0x2881FA17__Body\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Lens",
+    "type": "camera_lens*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1378567535.physical_camera_component_0.__verse_0x4E633223__Lens\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "CameraModifiers",
+    "type": "Verse_modifier_stack*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1378567535.physical_camera_component_0.__verse_0x2A50779A_CameraModifiers\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "NearClippingPlaneDistance",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "FarClippingPlaneDistance",
+    "type": "double",
+    "value": "inf",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "physical_camera_component",
+  "secs": 2.0
+ },
+ "/VerseEngineAssets/_Verse/VNI/VerseEngineAssets.BasicShapes_cone": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "BasicShapes_cone",
+  "secs": 2.0
+ },
+ "/VerseEngineAssets/_Verse/VNI/VerseEngineAssets.BasicShapes_cube": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "BasicShapes_cube",
+  "secs": 2.0
+ },
+ "/VerseEngineAssets/_Verse/VNI/VerseEngineAssets.BasicShapes_cylinder": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "BasicShapes_cylinder",
+  "secs": 2.0
+ },
+ "/VerseEngineAssets/_Verse/VNI/VerseEngineAssets.BasicShapes_plane": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "BasicShapes_plane",
+  "secs": 2.0
+ },
+ "/VerseEngineAssets/_Verse/VNI/VerseEngineAssets.BasicShapes_sphere": {
+  "props": [
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Collidable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Queryable",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "Visible",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "HiddenInGame",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadow",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastShadowAsTwoSided",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastHiddenShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectDynamicIndirectLighting",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectIndirectLightingWhileHidden",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "ReceivesDecals",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "TranslucencySortPriority",
+    "type": "int64",
+    "value": "0",
+    "bReadOnly": false
+   },
+   {
+    "name": "NeverDistanceCull",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastFarShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastInsetShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "CastContactShadow",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel0",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel1",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AffectedByLightingChannel2",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "VisibleInReflections",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   },
+   {
+    "name": "DetailMode",
+    "type": "detail_mode",
+    "value": "\"Low\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "BasicShapes_sphere",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Building_building_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Building_building_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Characters_fort_character_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Characters_fort_character_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Game_fort_ability_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Game_fort_ability_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Game_fort_damageable_component": {
+  "props": [
+   {
+    "name": "MaxHealth",
+    "type": "double",
+    "value": "500",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "Game_fort_damageable_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Game_fort_game_events_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Game_fort_game_events_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Teams_team_component": {
+  "props": [
+   {
+    "name": "TeamIdTag",
+    "type": "FVerseTagTypeInfo",
+    "value": "{\"internalTag\":null}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "Teams_team_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortnite.Vehicles_fort_vehicle_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "Vehicles_fort_vehicle_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_ai_target_component": {
+  "props": [
+   {
+    "name": "SightSense",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "TouchSense",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "HearingSense",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "DamageSense",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "AI_ai_target_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_decision_system_component": {
+  "props": [
+   {
+    "name": "DecisionSystem",
+    "type": "UObject*",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "StartOnSimulate",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "AI_decision_system_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_fort_aisettings_component": {
+  "props": [
+   {
+    "name": "AISettings",
+    "type": "AI_fort_aisettings*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1656605860.AI_fort_aisettings_component_0.__verse_0xEDB3D5C1_AISettings\"}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "AI_fort_aisettings_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_fort_bot_actions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_fort_bot_actions_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_fort_npc_component": {
+  "props": [
+   {
+    "name": "SpawnerData",
+    "type": "Verse::FNativeString",
+    "value": "\"\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "HasAvatar",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "AvatarAnimClass",
+    "type": "Verse::FNativeString",
+    "value": "\"\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "Logs",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "DrawSkeleton",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "AI_fort_npc_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_fort_wildlife_actions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_fort_wildlife_actions_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_guard_actions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_guard_actions_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_guard_awareness_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_guard_awareness_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_npc_actions_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_npc_actions_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_npc_awareness_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_npc_awareness_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_npc_behavior_component": {
+  "props": [
+   {
+    "name": "NPCBehavior",
+    "type": "AI_npc_behavior*",
+    "value": "null",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "AI_npc_behavior_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_npc_sidekick_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "AI_npc_sidekick_component",
+  "secs": 2.0
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_sidekick_component": {
+  "error": "ValkyrieToolset.EntityToolset.AddComponent: The component class '/VerseFortnite/_Verse/VNI/VerseFortniteAI.AI_sidekick_component' is abstract.",
+  "name": "AI_sidekick_component",
+  "secs": 2.66
+ },
+ "/VerseFortnite/_Verse/VNI/VerseFortniteAI.Animation_PlayAnimation_fort_play_animation_component": {
+  "props": [
+   {
+    "name": "PlayAnimationSettings",
+    "type": "UAIAnimationComponentData*",
+    "value": "{\"refPath\":\"/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SceneGraphMCP.SceneGraphMCP:PersistentLevel.LevelEntity.LevelEntity.__atlas_probe_8lp8ersrc6ui3_1639744217.Animation_PlayAnimation_fort_play_animation_component_0.__verse_0xF308053D_PlayAnimationSettings\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "FullBodySlot",
+    "type": "Verse::FNativeString",
+    "value": "\"SequencerDefault\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "UpperBodySlot",
+    "type": "Verse::FNativeString",
+    "value": "\"UpperBody\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "Animation_PlayAnimation_fort_play_animation_component",
+  "secs": 4.0
+ },
+ "/VerseFortniteAbilities/_Verse/VNI/VerseFortniteAbilities.fort_item_ability_component": {
+  "props": [
+   {
+    "name": "ItemAbilities",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   },
+   {
+    "name": "ItemEquippedAbilities",
+    "type": "TArray",
+    "value": "[]",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_item_ability_component",
+  "secs": 4.0
+ },
+ "/VerseFortniteAbilities/_Verse/VNI/VerseFortniteAbilities.fort_projectile_component": {
+  "props": [
+   {
+    "name": "Speed",
+    "type": "double",
+    "value": "600",
+    "bReadOnly": false
+   },
+   {
+    "name": "Range",
+    "type": "double",
+    "value": "80000",
+    "bReadOnly": false
+   },
+   {
+    "name": "Gravity",
+    "type": "double",
+    "value": "0",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "fort_projectile_component",
+  "secs": 4.0
+ },
+ "/VerseFortniteAbilities/_Verse/VNI/VerseFortniteAbilities.fort_template_ability_effect_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "fort_template_ability_effect_component",
+  "secs": 2.0
+ },
+ "/VersePresentation/_Verse/VNI/VersePresentation.description_component": {
+  "props": [
+   {
+    "name": "Name",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/VersePresentation/_Verse/VNI/VersePresentation.Default___Root:__verse_0x41502826_EmptyMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Description",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/VersePresentation/_Verse/VNI/VersePresentation.Default___Root:__verse_0x41502826_EmptyMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Short Description",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/VersePresentation/_Verse/VNI/VersePresentation.Default___Root:__verse_0x41502826_EmptyMessage\"}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "description_component",
+  "secs": 2.0
+ },
+ "/VerseUI/_Verse/VNI/VerseUI.UI_local_hud_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "UI_local_hud_component",
+  "secs": 2.0
+ },
+ "/VerseUI/_Verse/VNI/VerseUISceneGraph.UI_absolute_container_element_component": {
+  "props": [
+   {
+    "name": "HorizontalAlignment",
+    "type": "UI_ui_alignment",
+    "value": "\"Start\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "VerticalAlignment",
+    "type": "UI_ui_alignment",
+    "value": "\"Start\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "Offsets",
+    "type": "FUI_ui_margin",
+    "value": "{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "UI_absolute_container_element_component",
+  "secs": 2.0
+ },
+ "/VerseUI/_Verse/VNI/VerseUISceneGraph.UI_container_element_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "UI_container_element_component",
+  "secs": 3.33
+ },
+ "/VerseUI/_Verse/VNI/VerseUISceneGraph.UI_flex_container_component": {
+  "props": [],
+  "auto_added": [
+   "UI_widget_root_context_component_0"
+  ],
+  "name": "UI_flex_container_component",
+  "secs": 4.0
+ },
+ "/VerseUI/_Verse/VNI/VerseUISceneGraph.UI_flex_container_element_component": {
+  "props": [
+   {
+    "name": "Margin",
+    "type": "FUI_ui_margin",
+    "value": "{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0}",
+    "bReadOnly": false
+   },
+   {
+    "name": "AlignSelf",
+    "type": "UI_ui_alignment",
+    "value": "\"Fill\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "AlignSelfMajorAxis",
+    "type": "UI_ui_alignment",
+    "value": "\"Fill\"",
+    "bReadOnly": false
+   },
+   {
+    "name": "GrowProportion",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "ShrinkProportion",
+    "type": "TOptional",
+    "value": "1",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "UI_flex_container_element_component",
+  "secs": 3.33
+ },
+ "/VerseUI/_Verse/VNI/VerseUISceneGraph.UI_grid_container_component": {
+  "name": "UI_grid_container_component",
+  "error": "CRASH: EntityToolset.AddComponent on a fresh entity crashed the editor (EXCEPTION_ACCESS_VIOLATION reading 0x48), UEFN 42.30, 2026-10-07",
+  "crash": true
+ }
+}

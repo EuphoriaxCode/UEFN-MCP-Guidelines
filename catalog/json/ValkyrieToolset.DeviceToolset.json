@@ -1,0 +1,560 @@
+{
+ "name": "ValkyrieToolset.DeviceToolset",
+ "version": "1.0",
+ "description": "AI-callable tools for UEFN Creative devices \u2014 classic Blueprint and Verse creative_device. Browse the\nproject's placeable device catalog, place devices, add or remove event bindings between placed devices,\nand read or write a Verse device's settings.",
+ "tools": [
+  {
+   "description": "Set one editable setting on a Verse creative_device.",
+   "name": "ValkyrieToolset.DeviceToolset.SetDeviceProperty",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "device": {
+      "type": "object",
+      "title": "/Script/VerseDevices.ScriptDevice",
+      "description": "A placed Verse creative_device.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "propertyName": {
+      "type": "string",
+      "description": "Setting name."
+     },
+     "value": {
+      "type": "string",
+      "description": "JSON-encoded value for the setting's type (e.g. 5, true, \"text\", {\"X\":1})."
+     }
+    },
+    "required": [
+     "device",
+     "propertyName",
+     "value"
+    ]
+   }
+  },
+  {
+   "description": "Remove an event binding from a source device's event to a target device's function.",
+   "name": "ValkyrieToolset.DeviceToolset.RemoveEventBinding",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "sourceDevicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of the source device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "sourceEvent": {
+      "type": "string",
+      "description": "Event name on the source device."
+     },
+     "targetDevicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of the target device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "targetFunction": {
+      "type": "string",
+      "description": "Function name on the target device."
+     }
+    },
+    "required": [
+     "sourceDevicePath",
+     "sourceEvent",
+     "targetDevicePath",
+     "targetFunction"
+    ]
+   }
+  },
+  {
+   "description": "Place a catalog device (classic or Verse) into the level.",
+   "name": "ValkyrieToolset.DeviceToolset.PlaceDevice",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "assetPath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "A device asset reference (from the catalog).",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "transform": {
+      "type": "object",
+      "title": "ToolsetTransform",
+      "description": "World-space transform to place the device with; scale is applied after spawn.",
+      "properties": {
+       "location": {
+        "description": "The world-space location.",
+        "title": "Vector",
+        "type": "object",
+        "properties": {
+         "x": {
+          "type": "number"
+         },
+         "y": {
+          "type": "number"
+         },
+         "z": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "x",
+         "y",
+         "z"
+        ]
+       },
+       "rotation": {
+        "description": "The world-space rotation.",
+        "title": "Rotator",
+        "type": "object",
+        "properties": {
+         "pitch": {
+          "type": "number",
+          "description": "Pitch (degrees) around Y axis"
+         },
+         "yaw": {
+          "type": "number",
+          "description": "Yaw (degrees) around Z axis"
+         },
+         "roll": {
+          "type": "number",
+          "description": "Roll (degrees) around X axis"
+         }
+        },
+        "required": [
+         "pitch",
+         "yaw",
+         "roll"
+        ]
+       },
+       "scale": {
+        "description": "The scale.",
+        "title": "Vector",
+        "type": "object",
+        "properties": {
+         "x": {
+          "type": "number"
+         },
+         "y": {
+          "type": "number"
+         },
+         "z": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "x",
+         "y",
+         "z"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "assetPath",
+     "transform"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of the placed device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "List the event bindings currently wired into a device's target functions.",
+   "name": "ValkyrieToolset.DeviceToolset.ListEventBindings",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "devicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of the device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     }
+    },
+    "required": [
+     "devicePath"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "DeviceEventBinding",
+       "type": "object",
+       "properties": {
+        "sourceDevicePath": {
+         "type": "object",
+         "title": "/Script/CoreUObject.Object",
+         "description": "Object path of the source device that emits the event.",
+         "properties": {
+          "refPath": {
+           "type": "string",
+           "description": "The reference stored as a soft path string."
+          }
+         },
+         "required": [
+          "refPath"
+         ]
+        },
+        "sourceEvent": {
+         "type": "string",
+         "description": "Source event name on the source device."
+        },
+        "targetDevicePath": {
+         "type": "object",
+         "title": "/Script/CoreUObject.Object",
+         "description": "Object path of the target device that receives the event.",
+         "properties": {
+          "refPath": {
+           "type": "string",
+           "description": "The reference stored as a soft path string."
+          }
+         },
+         "required": [
+          "refPath"
+         ]
+        },
+        "targetFunction": {
+         "type": "string",
+         "description": "Target function name that receives the event."
+        }
+       },
+       "required": [
+        "sourceDevicePath",
+        "sourceEvent",
+        "targetDevicePath",
+        "targetFunction"
+       ]
+      },
+      "description": "One entry per existing binding."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "List a Verse creative_device's editable settings as a JSON property schema, with friendly names.",
+   "name": "ValkyrieToolset.DeviceToolset.ListDeviceProperties",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "device": {
+      "type": "object",
+      "title": "/Script/VerseDevices.ScriptDevice",
+      "description": "A placed Verse creative_device.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     }
+    },
+    "required": [
+     "device"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "description": "JSON Schema of the editable settings."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "List the project's placeable Creative devices \u2014 classic (Blueprint) and Verse (creative_device).",
+   "name": "ValkyrieToolset.DeviceToolset.ListDeviceAssets",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "nameFilter": {
+      "type": "string",
+      "description": "Case-insensitive substring matched against each device's asset name. Empty lists all.",
+      "default": ""
+     }
+    }
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "DeviceAssetInfo",
+       "type": "object",
+       "properties": {
+        "displayName": {
+         "type": "string",
+         "description": "The device asset's name."
+        },
+        "assetPath": {
+         "type": "object",
+         "title": "/Script/CoreUObject.Object",
+         "description": "Object path of the device asset.",
+         "properties": {
+          "refPath": {
+           "type": "string",
+           "description": "The reference stored as a soft path string."
+          }
+         },
+         "required": [
+          "refPath"
+         ]
+        },
+        "category": {
+         "type": "string",
+         "description": "Device category label (e.g. \"Gameplay\"). Empty for a Verse device."
+        },
+        "bIsVerseDevice": {
+         "type": "boolean",
+         "description": "True for a Verse creative_device; false for a classic Blueprint device."
+        }
+       },
+       "required": [
+        "displayName",
+        "assetPath",
+        "category",
+        "bIsVerseDevice"
+       ]
+      },
+      "description": "One entry per matching device."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Read named settings from a Verse creative_device.",
+   "name": "ValkyrieToolset.DeviceToolset.GetDeviceProperties",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "device": {
+      "type": "object",
+      "title": "/Script/VerseDevices.ScriptDevice",
+      "description": "A placed Verse creative_device.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "propertyNames": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "Setting names."
+     }
+    },
+    "required": [
+     "device",
+     "propertyNames"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "description": "JSON object of values, keyed by the requested names."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Get the source events and target functions a device exposes for binding.",
+   "name": "ValkyrieToolset.DeviceToolset.GetBindingOptions",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "devicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of the device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     }
+    },
+    "required": [
+     "devicePath"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "title": "DeviceBindingOptions",
+      "description": "The device's bindable source events and target functions.",
+      "type": "object",
+      "properties": {
+       "sourceEvents": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Bindable source event names."
+       },
+       "targetFunctions": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Bindable target function names."
+       }
+      },
+      "required": [
+       "sourceEvents",
+       "targetFunctions"
+      ]
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Bind a source device's event to a target device's function so the event triggers it (idempotent \u2014\nre-binding the same pair is a no-op).",
+   "name": "ValkyrieToolset.DeviceToolset.AddEventBinding",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "sourceDevicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of an already-placed source device actor (not a catalog asset path).",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "sourceEvent": {
+      "type": "string",
+      "description": "Event name on the source device."
+     },
+     "targetDevicePath": {
+      "type": "object",
+      "title": "/Script/CoreUObject.Object",
+      "description": "Object path of an already-placed target device actor.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "targetFunction": {
+      "type": "string",
+      "description": "Function name on the target device."
+     }
+    },
+    "required": [
+     "sourceDevicePath",
+     "sourceEvent",
+     "targetDevicePath",
+     "targetFunction"
+    ]
+   }
+  }
+ ]
+}

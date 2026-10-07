@@ -1,0 +1,32 @@
+{
+ "name": "ValkyrieToolset.ValkyriePythonToolset",
+ "version": "1.0",
+ "description": "Enables and checks Python for the current UEFN project. The core engine Python toolsets (actor,\nobject, scene, asset) only load once Python is enabled, so enable it first when they are missing.",
+ "tools": [
+  {
+   "description": "Whether the main UEFN project has Python enabled and the interpreter is initialized. Enablement follows\nthe main project alone: a referenced project's saved setting is loaded but never applied.",
+   "name": "ValkyrieToolset.ValkyriePythonToolset.IsPythonEnabledInUEFN",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Enable Python for the active UEFN project. Enablement is ASYNCHRONOUS: the core Python toolsets\nappear after the editor next ticks, not immediately on return - re-list toolsets / retry before\nassuming failure. Raises if there is no active project or the Python setting is unavailable.",
+   "name": "ValkyrieToolset.ValkyriePythonToolset.EnablePythonInUEFN",
+   "inputSchema": {
+    "type": "object"
+   }
+  }
+ ]
+}

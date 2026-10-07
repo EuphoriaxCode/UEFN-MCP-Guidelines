@@ -1,0 +1,516 @@
+{
+ "name": "VerseFieldsToolset.VerseFieldsToolset",
+ "version": "1.0",
+ "description": "Authors Verse fields on a Widget Blueprint and binds widget properties to them via MVVM. Covers\nlisting, adding, editing, removing, and duplicating fields, plus creating the view binding that\ndrives a widget property from a field's value.",
+ "tools": [
+  {
+   "description": "Removes a Verse field by name. Recompiles. Not supported during PIE.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.RemoveVerseField",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "Target widget blueprint.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "fieldName": {
+      "type": "string",
+      "description": "Name of the field to remove."
+     }
+    },
+    "required": [
+     "widgetBlueprint",
+     "fieldName"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "boolean",
+      "description": "True on success; false with a script error on failure."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Lists the Verse-authored fields on a Widget Blueprint.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.ListVerseFields",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "The widget blueprint to inspect.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     }
+    },
+    "required": [
+     "widgetBlueprint"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "VerseFieldInfo",
+       "type": "object",
+       "properties": {
+        "name": {
+         "type": "string"
+        },
+        "type": {
+         "type": "string"
+        },
+        "defaultValue": {
+         "type": "string",
+         "description": "usually one of bool/int/float/string/color/color_alpha/texture/material/message/event; an unrecognized pin type falls back to UE's raw pin-category name"
+        },
+        "visibility": {
+         "type": "string",
+         "title": "EAccessSpecifier",
+         "enum": [
+          "Public",
+          "Internal",
+          "Protected",
+          "Private",
+          "Scoped",
+          "Unset"
+         ]
+        },
+        "writeAccess": {
+         "type": "string",
+         "title": "EAccessSpecifier",
+         "enum": [
+          "Public",
+          "Internal",
+          "Protected",
+          "Private",
+          "Scoped",
+          "Unset"
+         ]
+        },
+        "bIsVar": {
+         "type": "boolean"
+        },
+        "bIsEvent": {
+         "type": "boolean"
+        },
+        "eventParameterTypes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "For an event field (bIsEvent=true), the ordered parameter types (\"bool\"/\"int\"/\"float\"). Empty otherwise or for a parameterless event."
+        }
+       },
+       "required": [
+        "name",
+        "type",
+        "defaultValue",
+        "visibility",
+        "writeAccess",
+        "bIsVar",
+        "bIsEvent",
+        "eventParameterTypes"
+       ]
+      },
+      "description": "One entry per Verse field (name, type keyword, default, access, mutability)."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Accepted Spec.Type / Spec.EventParameterTypes values. Query this instead of assuming a fixed\nlist -- it reads from the same place the validation does.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.GetSupportedVerseFieldTypes",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "title": "VerseFieldSupportedTypes",
+      "description": "Accepted Spec.Type and Spec.EventParameterTypes values.",
+      "type": "object",
+      "properties": {
+       "fieldTypes": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Every value FVerseFieldSpec::Type accepts."
+       },
+       "eventParameterTypes": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Every value FVerseFieldSpec::EventParameterTypes accepts (only relevant when Type is \"event\")."
+       }
+      },
+      "required": [
+       "fieldTypes",
+       "eventParameterTypes"
+      ]
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Edits an existing Verse field (retype/default/access/mutability). Recompiles. Not supported during PIE.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.EditVerseField",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "Target widget blueprint.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "fieldName": {
+      "type": "string",
+      "description": "Name of the existing field to edit."
+     },
+     "spec": {
+      "title": "VerseFieldSpec",
+      "description": "Describes the field's new state (type, optional event parameters, default, access, mutability).",
+      "type": "object",
+      "properties": {
+       "type": {
+        "type": "string",
+        "description": "Query GetSupportedVerseFieldTypes for the current list of accepted values (e.g. bool, int, float, event, ...)."
+       },
+       "eventParameterTypes": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Only valid when Type is \"event\" -- ordered parameter types, see GetSupportedVerseFieldTypes().\nMust be empty otherwise. Subject to VerseTypeEditor.EnableEventsCreation and\nVerseTypeEditor.MaxEventParametersNumberCreation."
+       },
+       "defaultValue": {
+        "type": "string",
+        "description": "Optional string default (empty for none). Must be empty when Type is \"event\"."
+       },
+       "visibility": {
+        "type": "string",
+        "title": "EAccessSpecifier",
+        "enum": [
+         "Public",
+         "Internal",
+         "Protected",
+         "Private",
+         "Scoped",
+         "Unset"
+        ],
+        "description": "Verse read access (Public/Internal/Protected/Private)."
+       },
+       "writeAccess": {
+        "type": "string",
+        "description": "Verse write access as a specifier string: \"\" inherits Visibility; otherwise one of\n\"<public>\", \"<internal>\", \"<protected>\", \"<private>\", \"<scoped>\"."
+       },
+       "bIsVar": {
+        "type": "boolean",
+        "description": "True = mutable `var`, false = immutable."
+       }
+      },
+      "required": [
+       "type",
+       "eventParameterTypes",
+       "defaultValue",
+       "visibility",
+       "writeAccess",
+       "bIsVar"
+      ]
+     },
+     "newName": {
+      "type": "string",
+      "description": "When non-empty, renames the field to this name."
+     }
+    },
+    "required": [
+     "widgetBlueprint",
+     "fieldName",
+     "spec",
+     "newName"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "boolean",
+      "description": "True on success; false with a script error on failure."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Duplicates a Verse field under a new name. Recompiles. Not supported during PIE.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.DuplicateVerseField",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "Target widget blueprint.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "fieldName": {
+      "type": "string",
+      "description": "Name of the existing field to duplicate."
+     },
+     "newName": {
+      "type": "string",
+      "description": "Name for the duplicated field. Required: must be non-empty and not already in use on the blueprint. The duplicate is named exactly this; an empty or colliding name fails with a script error."
+     }
+    },
+    "required": [
+     "widgetBlueprint",
+     "fieldName",
+     "newName"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "boolean",
+      "description": "True on success; false with a script error on failure."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Binds a widget property to a Verse field on the same Widget Blueprint (the field is the MVVM SelfContext\nsource). Creates the view binding and applies the requested mode; recompiles. Not supported during PIE.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.BindWidgetPropertyToVerseField",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "Target widget blueprint (must already contain VerseFieldName).",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "verseFieldName": {
+      "type": "string",
+      "description": "Existing Verse field to read from."
+     },
+     "targetWidget": {
+      "type": "object",
+      "title": "/Script/UMG.Widget",
+      "description": "Widget in the tree whose property is written.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "widgetPropertyPath": {
+      "type": "string",
+      "description": "Dot-path to the destination property (e.g. \"RenderOpacity\", \"ColorAndOpacity.SpecifiedColor\"). Case-sensitive."
+     },
+     "mode": {
+      "type": "string",
+      "title": "EMVVMBindingMode",
+      "enum": [
+       "OneTimeToDestination",
+       "OneWayToDestination",
+       "TwoWay",
+       "OneTimeToSource",
+       "OneWayToSource"
+      ],
+      "description": "Binding mode (default OneWayToDestination = Verse field drives the widget; TwoWay for editable write-back).",
+      "default": "OneWayToDestination"
+     },
+     "conversionName": {
+      "type": "string",
+      "description": "Optional conversion function name for type mismatches (None = auto).",
+      "default": "None"
+     }
+    },
+    "required": [
+     "widgetBlueprint",
+     "verseFieldName",
+     "targetWidget",
+     "widgetPropertyPath"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "description": "Valid binding FGuid on success; invalid FGuid with a script error on failure.",
+      "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Adds a new Verse field (variable) to a Widget Blueprint. The field becomes bindable (FieldNotify) and\nis reflected into the widget's generated Verse class. Recompiles the blueprint. Not supported during PIE.",
+   "name": "VerseFieldsToolset.VerseFieldsToolset.AddVerseField",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "widgetBlueprint": {
+      "type": "object",
+      "title": "/Script/UMGEditor.WidgetBlueprint",
+      "description": "Target widget blueprint.",
+      "properties": {
+       "refPath": {
+        "type": "string",
+        "description": "The reference stored as a soft path string."
+       }
+      },
+      "required": [
+       "refPath"
+      ]
+     },
+     "fieldName": {
+      "type": "string",
+      "description": "Name of the new field. Must be a valid identifier and unique on the blueprint."
+     },
+     "spec": {
+      "title": "VerseFieldSpec",
+      "description": "Describes the field to add (type, optional event parameters, default, access, mutability).",
+      "type": "object",
+      "properties": {
+       "type": {
+        "type": "string",
+        "description": "Query GetSupportedVerseFieldTypes for the current list of accepted values (e.g. bool, int, float, event, ...)."
+       },
+       "eventParameterTypes": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Only valid when Type is \"event\" -- ordered parameter types, see GetSupportedVerseFieldTypes().\nMust be empty otherwise. Subject to VerseTypeEditor.EnableEventsCreation and\nVerseTypeEditor.MaxEventParametersNumberCreation."
+       },
+       "defaultValue": {
+        "type": "string",
+        "description": "Optional string default (empty for none). Must be empty when Type is \"event\"."
+       },
+       "visibility": {
+        "type": "string",
+        "title": "EAccessSpecifier",
+        "enum": [
+         "Public",
+         "Internal",
+         "Protected",
+         "Private",
+         "Scoped",
+         "Unset"
+        ],
+        "description": "Verse read access (Public/Internal/Protected/Private)."
+       },
+       "writeAccess": {
+        "type": "string",
+        "description": "Verse write access as a specifier string: \"\" inherits Visibility; otherwise one of\n\"<public>\", \"<internal>\", \"<protected>\", \"<private>\", \"<scoped>\"."
+       },
+       "bIsVar": {
+        "type": "boolean",
+        "description": "True = mutable `var`, false = immutable."
+       }
+      },
+      "required": [
+       "type",
+       "eventParameterTypes",
+       "defaultValue",
+       "visibility",
+       "writeAccess",
+       "bIsVar"
+      ]
+     }
+    },
+    "required": [
+     "widgetBlueprint",
+     "fieldName",
+     "spec"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "boolean",
+      "description": "True on success; false with a script error on failure."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  }
+ ]
+}
