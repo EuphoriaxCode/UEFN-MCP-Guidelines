@@ -193,6 +193,43 @@ def c_shot(a):
     print(a.out)
 
 
+def client_capture(path):
+    """Fortnite client window via PrintWindow (works when the window is behind others)."""
+    import subprocess
+    ps1 = os.path.join(REPO, "scripts", "windows", "capture_fortnite_window.ps1")
+    r = subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ps1, "-Out", os.path.abspath(path)],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode != 0 or not os.path.exists(path):
+        raise RuntimeError("client capture failed: " + (r.stdout + r.stderr)[-400:])
+    return path
+
+
+def c_clip(a):
+    """N client frames every --interval seconds; with Pillow installed also a contact sheet."""
+    os.makedirs(a.dir, exist_ok=True)
+    frames = []
+    for i in range(a.frames):
+        t0 = time.time()
+        frames.append(client_capture(os.path.join(a.dir, f"{a.prefix}_{i:02d}.png")))
+        time.sleep(max(0.0, a.interval - (time.time() - t0)))
+    print("\n".join(frames))
+    try:
+        from PIL import Image
+    except ImportError:
+        return
+    ims = [Image.open(f).convert("RGB") for f in frames]
+    w = 640
+    h = int(ims[0].height * w / ims[0].width)
+    cols = min(a.cols, len(ims))
+    rows = (len(ims) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * w, rows * h), (20, 20, 20))
+    for i, im in enumerate(ims):
+        sheet.paste(im.resize((w, h)), ((i % cols) * w, (i // cols) * h))
+    out_p = os.path.join(a.dir, f"{a.prefix}_sheet.jpg")
+    sheet.save(out_p, quality=85)
+    print(out_p)
+
+
 def c_cam(a):
     if a.at is None and a.look is None:
         out(api.tool("editor", "GetCameraTransform"))
@@ -309,7 +346,13 @@ def c_session(a):
         if api.tool(S, "GetSessionStatus") != "Connected":
             out(api.tool(S, "StartSession"))
         else:
-            out(api.tool(S, "PushChanges", {"bVerseOnly": a.verse_only}))
+            try:
+                out(api.tool(S, "PushChanges", {"bVerseOnly": a.verse_only}))
+            except api.ToolError as e:  # "The Refresh command is not currently available" for Verse-only pushes
+                if not a.verse_only:
+                    raise
+                print(f"verse-only push refused ({str(e)[-80:]}); doing a full push", file=sys.stderr)
+                out(api.tool(S, "PushChanges", {"bVerseOnly": False}))
         if api.tool(S, "GetGameState") == "Running":
             api.tool(S, "StopGame")
         for _ in range(120):
@@ -491,6 +534,10 @@ def main(argv=None):
     x.add_argument("--at", help="capture from x,y,z (camera not moved)"); x.add_argument("--look", help="aim at x,y,z")
     x.add_argument("--rot", help="or explicit pitch,yaw,roll")
     x.set_defaults(f=c_shot)
+    x = s.add_parser("clip", help="burst-capture the Fortnite client window (+ contact sheet)")
+    x.add_argument("--frames", type=int, default=6); x.add_argument("--interval", type=float, default=1.0)
+    x.add_argument("--dir", default="clip"); x.add_argument("--prefix", default="frame"); x.add_argument("--cols", type=int, default=3)
+    x.set_defaults(f=c_clip)
     x = s.add_parser("cam", help="get/set the editor camera; --look x,y,z aims at a point")
     x.add_argument("--at"); x.add_argument("--rot"); x.add_argument("--look")
     x.set_defaults(f=c_cam)

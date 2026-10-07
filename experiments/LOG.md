@@ -207,3 +207,15 @@ Q04 PASS orb follows the character via TickEvents.PostPhysics: gap 0.000000 cm a
   `Enabled, AutoPlay, AutoPlayInEditor, TickPostPhysicsInternal`. Placed with `uefn sg apply examples/sg-lab/vfxdemo.json`;
   the fountain + particles render in the editor viewport (`screenshots/vfxdemo_editor.png`).
 - Correction to E13: per-instance editor materials via `assetForEditor` DO render once the MI shaders are compiled.
+
+### E20 ✅ Showcase: "Light Up The Floor" (`examples/floor-game`)
+- One Verse device builds a 5×5 board of custom-mesh tiles with their own materials, invisible trigger children,
+  keyframed pillars, a following orb + light; tiles glow and fire a Niagara burst when stepped on; confetti + reset on win.
+- Self-test (teleport snake walk): every tile lit exactly once, in order, ~0.37 s apart; `ROUND 1 COMPLETE`; reset after 4 s.
+- Runtime VFX: `NS_SG_Burst{Entity := entity{}}` added as a child entity auto-plays; `RemoveFromParent()` after N s cleans up.
+- Editor-placed KitDemo shapes kept their per-instance editor materials in game (red/green/blue/gold) → E13 editor path works end to end.
+- Verse traps hit: a field named `Round` collides with built-in `Round()` (3532/3588) — same family as `Floor`;
+  a local declared twice in one function (even in sibling scopes) is an error (3532 "ambiguous with ... G").
+- `PushChanges(bVerseOnly=true)` while the game runs → "The Refresh command is not currently available"; a full push works
+  (CLI `session restart --verse-only` now falls back automatically).
+- Verse `Print` lines show on the client HUD in play-tests (top-left), handy for screenshots.
