@@ -228,6 +228,9 @@ def c_clip(a):
     out_p = os.path.join(a.dir, f"{a.prefix}_sheet.jpg")
     sheet.save(out_p, quality=85)
     print(out_p)
+    if not a.keep:  # full-size PNGs are ~2 MB each: keep only the sheet unless asked
+        for f in frames:
+            os.remove(f)
 
 
 def c_cam(a):
@@ -537,7 +540,7 @@ def main(argv=None):
     x = s.add_parser("clip", help="burst-capture the Fortnite client window (+ contact sheet)")
     x.add_argument("--frames", type=int, default=6); x.add_argument("--interval", type=float, default=1.0)
     x.add_argument("--dir", default="clip"); x.add_argument("--prefix", default="frame"); x.add_argument("--cols", type=int, default=3)
-    x.set_defaults(f=c_clip)
+    x.add_argument("--keep", action="store_true", help="keep the individual PNG frames"); x.set_defaults(f=c_clip)
     x = s.add_parser("cam", help="get/set the editor camera; --look x,y,z aims at a point")
     x.add_argument("--at"); x.add_argument("--rot"); x.add_argument("--look")
     x.set_defaults(f=c_cam)
