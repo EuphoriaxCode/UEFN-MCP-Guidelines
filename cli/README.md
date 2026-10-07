@@ -11,6 +11,7 @@ python cli/uefn.py status            # or cli\uefn.cmd status on Windows
 ## Commands
 | Command | What it does |
 |---|---|
+| `turbo on` | **run first**: stop the editor's 3 FPS background throttle → MCP calls ~10 ms instead of 333 ms (until restart) |
 | `status` | toolsets, session/game state, Verse roots, entity count |
 | `wait [--timeout s]` | block until the editor's MCP answers (after a launch or crash) |
 | `toolsets` / `describe <ts> [tool]` | list toolsets / tools / one tool's schema. Aliases: `entity verse session device editor logs scene asset object material mi texture mesh umg fields mvvm niagara script …` |
@@ -19,7 +20,9 @@ python cli/uefn.py status            # or cli\uefn.cmd status on Windows
 | `catalog` | regenerate `catalog/` (every toolset's tools and schemas as Markdown + JSON) |
 | `digest [module] [--grep re] [--class c] [--comments]` | compact Verse API from the on-disk digests (works offline) |
 | `log [regex] [-n N] [--client]` | tail the editor (or Fortnite client) log, e.g. `uefn log "\[SGLab\]"` |
-| `shot [out.png] [--labels]` | capture the editor viewport |
+| `shot [out.png] [--at x,y,z --look x,y,z]` | capture the editor viewport (from any pose, without moving your camera) |
+| `clip [--frames 6 --interval 1.0 --dir d]` | burst-capture the **Fortnite client** window → contact sheet (`--keep` keeps PNGs) |
+| `device ls\|placed\|place\|props\|get\|set` | device catalog, placed devices by label, place by asset name, read/write Verse device editables |
 | `cam [--at x,y,z] [--look x,y,z \| --rot p,y,r]` | read/move the editor camera |
 | `verse ls\|cat\|grep\|rm\|push\|build` | Verse files; `verse push local.verse [/proj/Dir] --build` |
 | `build` | `BuildAll`; prints `BUILD OK` or the diagnostics and exits 1 |
@@ -34,7 +37,13 @@ python cli/uefn.py status            # or cli\uefn.cmd status on Windows
 | `sg xf <path> [--at] [--rot] [--scale] [--world]` | read or set transform; local by default |
 | `sg apply spec.json [--parent P] [--prune]` | idempotent declarative build (see below) |
 | `sg dump <path> [--props]` | export an entity subtree as a spec (round-trips with `apply`) |
+| `sg build spec.json [--parent P]` | create-only fast path: the whole spec in ONE `execute_tool_script` call (128 entities ≈ 6 s) |
+| `sg stamp tpl.json Parent/Name [--at] [--set Child.comp.Prop=json]` | spec prefab instance; overrides recorded in `tpl.instances.json` |
+| `sg propagate tpl.json [--prune]` | re-apply the template to every recorded instance, keeping each instance's overrides |
 | `sg atlas [filter]` | (re)build `catalog/scene-graph/component-atlas.*` |
+
+Material slots on custom meshes: in specs use `{"Main": {"material": "/<root>/SGKit/Materials/MI_SG_Red"}}`
+(sets the slot's `assetForEditor`; renders once the instance's shaders are compiled).
 
 **Entity paths** use short names (the editor's random `_xxxx_123` suffix is stripped): `Showroom/BackWall`.
 A bare name works when it is unique. Full display names and raw `refPath`s also work.

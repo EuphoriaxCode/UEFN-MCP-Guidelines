@@ -48,6 +48,28 @@ Everything below should end up either *proven* (with a recipe/example) or *prove
 **Systems to prove the stack** (each one a folder in `examples/`)
 - Procedural level generator, physics toys, animated machines, interactive UI-in-world, NPC/AI behaviours, minigames.
 
+## Backlog status (end of session 1, 2026-10-07 — details in `experiments/LOG.md`)
+| Item | Status |
+|---|---|
+| Toolset catalog, component atlas (152), Verse visibility | ✅ E02, E08, E08b |
+| Declarative scenes (apply/dump), fast sandbox build, spec prefabs (stamp/propagate) | ✅ E21 |
+| Custom meshes → per-instance materials (editor + runtime) | ✅ E13, E14 |
+| Niagara VFX by tool → spawnable components | ✅ E19, E20 |
+| Runtime spawn/tags/queries/events/keyframes/ticks/lights/visibility | ✅ E12, E14 |
+| One-tick collision lag explained + clean spawn pattern | ✅ E15, E16 |
+| Players as entities, following, mesh triggers with characters | ✅ E15, E16 |
+| Scene Graph camera takeover | ✅ E22 (experimental → not publishable) |
+| Input-driven systems (Jump/WeaponPrimary) | ✅ hooks + self-test E23; real presses need a human |
+| Prefab instancing + overrides | ✅ E17 · **creating** prefab assets ❌ (human step) |
+| 3D text (`text_display_component`) text | ❌ E18 (needs a message object path) |
+| Fortnite inventory from Verse via `inventory_component` | ❌ E22 (players have none) |
+| Showcases | ✅ Light Up The Floor (E20), Paint Blaster (E23) |
+
+**Next unknowns worth testing:** physics on editor-placed `rigid_body_component` entities · Niagara user parameters (colour)
+exposed to Verse? · runtime `basic_interactable_component` driven by `Start/Succeed` · sound assets → `sound_component`
+· camera modifiers (`fort_orbit_camera_modifier`…) · multiplayer attribution (which player triggered a mesh) ·
+human playtest of the showcases.
+
 ## Where things go
 | Path | What |
 |---|---|

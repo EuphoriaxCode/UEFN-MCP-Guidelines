@@ -95,6 +95,30 @@ KM.Play();  KM.FinishedEvent.Await()
 - `E.SetPresentableToPlayers(option{array{}})` hid an entity from the (only) player while a sibling stayed visible.
   Doc: `false` = everyone, `option{array}` = only those players.
 
+## VFX (E19, E20)
+- Niagara systems created by `NiagaraToolset_System.CreateNiagaraSystem` (from `/Niagara/DefaultAssets/Templates/Systems/*`)
+  become `class(particle_system_component)` after `BuildAll` → `NS_SG_Burst{Entity := E}`; auto-plays when added.
+- One-shot pattern: child entity holding the VFX, `spawn{ Sleep(N); E.RemoveFromParent() }`.
+
+## Cameras (E22) — experimental (blocks publishing)
+- Every player has a `camera_director_component` (`P.FindDescendantComponents(camera_director_component)`).
+- `Handle := Director.AddCamera[perspective_camera_component{...}, 100]` switches the client view to that camera entity;
+  `Handle.Cancel()` returns it. Build warning 2304 "experimental … will prevent you from publishing".
+
+## Input (E23)
+- Publishable: `/Fortnite.com/Input/Character` `Jump, Crouch, Sprint` (TraversalMapping), `WeaponPrimary, WeaponSecondary, Reload`
+  (RangedWeaponMapping). Experimental: `Move:input_action(vector3)`, `Interact`.
+- `GetPlayerInput[P].GetInputEvents(Jump).TriggerActivationEvent.Subscribe(Handler)` — handler gets `tuple(player, logic)`.
+- Aim from the camera: `fort_character.GetViewLocation/GetViewRotation` → convert → `rotation.GetForwardAxis()`.
+
+## Projectiles without physics (E23)
+Entity + mesh (non-collidable) + a component that moves it `Velocity * Dt` each `PostPhysics` tick and calls
+`Entity.FindSweepHits(Step)` (skip `H.TargetComponent.Entity = Entity`) — 8/8 hits in the self-test, contact points exact.
+
+## Items (E22)
+- All BR/Creative items are entity classes in `/Fortnite.com/Items` (`Apple_BR_CH1S4_Common{}`); they spawn into the world
+  as entities (bandage: 8 components). Player entities have **no** `inventory_component`, so `AddItem` can't reach Fortnite inventories.
+
 ## Lights
 - `sphere_light_component{Entity := E}` added at runtime; `set L.Intensity`, `set L.CastShadows`, `Enable()/Disable()`,
   `set L.ColorFilter` (E12, lamp showroom).
