@@ -146,3 +146,38 @@ L06 PASS spawn 2000 cube entities: spawn sim-time 0 s, then 24.5 Hz over 2 s   (
   that only uses the old SpatialMath (`sglab_teleport.verse`).
 - Open: sweep distances always 0 (and 13 unrelated hits = number of custom cubes in the scene); enter/exit flicker (17 pairs).
 - Budget: 2000 static cube entities cost ~20 % server tick (30 → 24.5 Hz).
+
+### E15 ✅ Lab 3 — players as entities, triggers, and the one-tick collision lag
+```
+P01 PASS player as entity:  entity-global (0, 0, 0) char UE(-246, 771, 486) comps 3 children 0 has parent;
+P02 PASS child entity parented to the player: halo global (0, 0, 220)
+P03 PASS mesh EntityEnteredEvent with a player (teleported onto a non-collidable pad): enter:entity@1042.396 exit:entity@1042.430
+P04 FindSweepHits per-hit detail (probe at (3100,-2500,950)): [1] other at (2500,-2500,410) d=0 move=(-600,0,-500) [2] TARGET d=0 move=(-600,0,-500)
+P04b FindSweepHits with a collision_sphere volume: 0 hits
+P05 enter/exit timeline (both non-collidable): in×4 @1045.4015, out×4 @1045.4349, in@1046.136, out@1046.737
+P06 FAIL FindOverlapHits(transform, collision_sphere): r200: 0 hits; r400: 0 hits
+```
+- `agent := class(entity)`, `player := class(agent)` — but the **player entity is not spatial** (global transform (0,0,0),
+  3 components, has a parent). Children parented to a player stay at world origin; they do NOT follow the character.
+- Mesh `EntityEnteredEvent` fires for the player's character, but `Other` is neither `player` nor `agent` (some character entity).
+- **Hypothesis (one explanation for all anomalies):** a freshly spawned entity's collision body stays where the entity was added
+  (the parent's origin) until the next tick, even after `SetLocalTransform`. Evidence: sweep "move" vector (−600,0,−500) takes the
+  probe exactly to the root origin; spawn-time enter/exit bursts; overlap queries at the visual positions find nothing.
+  The mover passing through the gate later produced exactly one clean in/out pair → events themselves work. → verified in E16.
+- `collision_sphere{Radius := 20.0}` is constructible from Verse and accepted by `FindSweepHits/FindOverlapHits(transform, volume)`.
+
+### E16 ✅ Lab 4 — collision lag confirmed, the clean spawn pattern, following a player
+```
+Q01 PASS overlap query finds a just-moved entity only after a tick: same frame 0, after Sleep(0) 1, after 0.1 s 1
+Q02 PASS SetGlobalTransform BEFORE AddEntities avoids the lag: same frame 1, after Sleep(0) 1, at (5800, -10000, 900)
+Q03 PASS FindSweepHits after the bodies settled: TARGET d=400.000000 contact=(3750,-5050,500) n=(0,0,100)
+Q04 PASS orb follows the character via TickEvents.PostPhysics: gap 0.000000 cm after 30 ticks
+```
+- **Confirmed:** after `AddEntities` + `SetLocalTransform` in the same frame, the collision body is still at the parent origin.
+  Queries (`FindOverlapHits`, `FindSweepHits`) and enter/exit events see the stale position until the next tick → `Sleep(0.0)`.
+- On an entity that is **not yet in the scene**, `SetGlobalTransform` is stored as the **local** transform: setting
+  parent+offset then adding under the parent put it at parent+parent+offset (5800,−10000,900). Use `SetLocalTransform`
+  before `AddEntities` → body is created at the right place immediately (no lag).
+- Sweeps are exact once settled (distance 400 for a 500 cm gap between 100 cm cubes, normal +Up).
+- Following a player: player entities aren't spatial → a component that sets `Entity.SetGlobalTransform(char pos + offset)`
+  in `TickEvents.PostPhysics` tracks with 0 cm error at the 30 Hz server tick.

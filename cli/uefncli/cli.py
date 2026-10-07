@@ -252,6 +252,44 @@ def c_build(a):
     sys.exit(1)
 
 
+# ------------------------------------------------------------------ devices
+def _device_ref(name):
+    """placed Verse device by label substring (e.g. 'sglab2') -> ref"""
+    if name.startswith("/"):
+        return {"refPath": name}
+    acts = api.tool("scene", "find_actors", {"collision_channels": []})
+    hits = [x for x in acts if name.lower() in (x.get("label") or "").lower()]
+    if len(hits) != 1:
+        raise KeyError(f"device '{name}': {len(hits)} matches " + str([h.get('label') for h in hits][:8]))
+    return {"refPath": hits[0]["actorPath"]}
+
+
+def c_device(a):
+    if a.op == "ls":  # catalog (placeable assets)
+        for d in api.tool("device", "ListDeviceAssets", {"nameFilter": a.target or ""}):
+            print(f"{d['displayName']:60s} {'verse ' if d['bIsVerseDevice'] else 'device'} {d['assetPath']['refPath']}")
+    elif a.op == "placed":
+        for x in api.tool("scene", "find_actors", {"collision_channels": []}):
+            cls = x["class"]["refPath"]
+            if "Device" in cls or "VerseDevice" in cls:
+                if not a.target or a.target.lower() in (x.get("label") or "").lower():
+                    print(f"{x.get('label', ''):45s} {cls.split('.')[-1]:40s} {x['actorPath']}")
+    elif a.op == "place":
+        assets = api.tool("device", "ListDeviceAssets", {"nameFilter": a.target})
+        exact = [d for d in assets if d["displayName"].lower().endswith(a.target.lower())] or assets
+        if not exact:
+            sys.exit(f"no device asset matching {a.target}")
+        xf = Xf(parse_vec(a.at, (0, 0, 384)), parse_vec(a.rot, (0, 0, 0)), parse_vec(a.scale, (1, 1, 1)))
+        out(api.tool("device", "PlaceDevice", {"assetPath": exact[0]["assetPath"], "transform": xf.to_json()}))
+    elif a.op == "props":
+        out(api.tool("device", "ListDeviceProperties", {"device": _device_ref(a.target)}))
+    elif a.op == "get":
+        out(api.tool("device", "GetDeviceProperties", {"device": _device_ref(a.target), "propertyNames": a.prop.split(",")}))
+    elif a.op == "set":
+        out(api.tool("device", "SetDeviceProperty", {"device": _device_ref(a.target), "propertyName": a.prop,
+                                                     "value": sg.jval(a.value)}))
+
+
 # ------------------------------------------------------------------ session
 def c_session(a):
     S = "session"
@@ -461,6 +499,11 @@ def main(argv=None):
     x.add_argument("op", choices=["ls", "cat", "grep", "rm", "push", "build"]); x.add_argument("path", nargs="?")
     x.add_argument("dest", nargs="?"); x.add_argument("--build", action="store_true"); x.set_defaults(f=c_verse)
     s.add_parser("build", help="BuildAll Verse; exit 1 with diagnostics on failure").set_defaults(f=c_build)
+
+    x = s.add_parser("device", help="ls [filter] | placed [label] | place <asset> --at | props|get|set <label> [prop] [value]")
+    x.add_argument("op", choices=["ls", "placed", "place", "props", "get", "set"]); x.add_argument("target", nargs="?")
+    x.add_argument("prop", nargs="?"); x.add_argument("value", nargs="?")
+    x.add_argument("--at"); x.add_argument("--rot"); x.add_argument("--scale"); x.set_defaults(f=c_device)
 
     x = s.add_parser("session", help="status|start|stop|push|game-start|game-stop|restart")
     x.add_argument("op", choices=["status", "start", "stop", "push", "game-start", "game-stop", "restart"])
