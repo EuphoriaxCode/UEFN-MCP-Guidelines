@@ -125,7 +125,8 @@ Script: `experiments/e09_mesh_material.py`, meshes from `cli/uefncli/meshgen.py`
   with property `Main` (`Assets_material*`), and the material `M_SG_Color` is a Verse class with `var Color/Glow/Roughness/Metallic`.
 - Editor: `SetComponentProperty(Main, <MI asset>)` ❌ "not valid Assets_material". The slot holds an instanced `Assets_material`
   subobject whose only property is `assetForEditor`; `ObjectTools.set_properties(sub, {"assetForEditor": MI})` ✅ sets and reads back,
-  but ❌ **the editor viewport keeps rendering the mesh's default material** (tried visibility toggle + move). Editor colour preview: open question.
+  and ✅ **the editor viewport does show it** — but only after the material instances finish compiling (captures right after
+  setting were still grey; a capture minutes later shows red/green/blue/gold, `screenshots/vfxdemo_editor.png`). *(corrected in E19)*
 - **Runtime (Verse) ✅**: `C := SM_SG_cube{Entity := E}; M := M_SG_Color{}; set M.Color = MakeColorFromHSV(30.0*I,1.0,1.0); set C.Main = M`
   → 12 differently coloured cubes; `set M.Color/Glow` every tick animates live (`screenshots/client_lab2.png`).
 - **Verse access rule**: asset folders are *internal* modules. Code using `SGKit/Meshes` or `SGKit/Materials` must live in `SGKit/`
@@ -181,3 +182,28 @@ Q04 PASS orb follows the character via TickEvents.PostPhysics: gap 0.000000 cm a
 - Sweeps are exact once settled (distance 400 for a 500 cm gap between 100 cm cubes, normal +Up).
 - Following a player: player entities aren't spatial → a component that sets `Entity.SetGlobalTransform(char pos + offset)`
   in `TickEvents.PostPhysics` tracks with 0 cm error at the 30 Hz server tick.
+
+### E17 ✅ Prefab classes: instancing + per-instance overrides work; creation still impossible
+- Cooked engine prefabs exist only as generated classes (`/EntityFramework/ReplicationTest/Prefab_RepTest_ParentChild.Prefab_RepTest_ParentChild_C`);
+  `AssetTools.get_asset_class` says the asset doesn't exist and `ObjectTools.list_properties` on the class/CDO returns nothing.
+- `uefn sg new PrefabTest --cls <prefab _C>` → instance with its children (`ChildOne`, `ChildTwo/SubChildThree`; prefab child
+  names have no random suffix). `sg dump` reads it back with `"class"`.
+- Overrides on an instance all worked: `AddComponent` on a prefab child, moving a child, adding a new child entity.
+- ⇒ The only missing step is creating the prefab asset (human: Outliner → Create Prefab). Everything after that is scriptable.
+
+### E18 ❌ 3D text (`text_display_component`) text can't be set by the agent
+- `Message` holds an object path to a `Verse_message` (default `/EntityFramework/_Verse/VNI/Component.Default___Root:__verse_0x41502826_EmptyMessage`).
+- `SetComponentProperty(Message, "Hello")` → "not a valid object path"; JSON objects are silently ignored.
+- Module-level `<localizes>` messages live as subobjects `Default___Root:__verse_0x<hash>_<Name>`; the hash isn't CRC32/FNV/MD5
+  of the obvious Verse paths, and `_Root` objects expose no properties → no way found to reference a message object. Open.
+- `Font` is an instanced `Assets_font` with `assetForEditor` (same pattern as material slots).
+
+### E19 ✅ Niagara VFX created by tool → Scene Graph components
+- `NiagaraToolset_System.CreateNiagaraSystem(assetName, assetPath, templateSystem)` from engine templates
+  (`/Niagara/DefaultAssets/Templates/Systems/{FountainLightweight,RadialBurst,SimpleExplosion,MinimalLightweight}`) ✅;
+  `AddEmitter(system, templateEmitter=/Niagara/DefaultAssets/Templates/Emitters/ConfettiBurst, emitterName)` ✅ (GPU sprite emitter).
+  `GetSystemCompileState` → `UpToDate` (confetti still compiling right after adding the emitter).
+- After save + `BuildAll`: component classes `SGKit-VFX-NS_SG_{Fountain,Burst,Explosion,Confetti}`, editables
+  `Enabled, AutoPlay, AutoPlayInEditor, TickPostPhysicsInternal`. Placed with `uefn sg apply examples/sg-lab/vfxdemo.json`;
+  the fountain + particles render in the editor viewport (`screenshots/vfxdemo_editor.png`).
+- Correction to E13: per-instance editor materials via `assetForEditor` DO render once the MI shaders are compiled.
