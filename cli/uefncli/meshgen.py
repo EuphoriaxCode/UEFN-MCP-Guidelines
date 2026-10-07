@@ -18,6 +18,13 @@ class Obj:
         return len(self.v)
 
     def tri(self, a, b, c):
+        # Auto-orient: verified in UEFN 42.30 that a triangle renders front-facing when, in UE coordinates,
+        # cross(b-a, c-a) points AGAINST the outward normal (UE is left-handed). Fix the order to match.
+        pa, pb, pc = self.v[a - 1], self.v[b - 1], self.v[c - 1]
+        fn = _cross(_sub(pb, pa), _sub(pc, pa))
+        n = [sum(self.vn[i - 1][k] for i in (a, b, c)) for k in range(3)]
+        if sum(x * y for x, y in zip(fn, n)) > 0:
+            b, c = c, b
         self.f.append((a, b, c))
 
     def quad(self, a, b, c, d):
@@ -25,15 +32,15 @@ class Obj:
         self.tri(a, c, d)
 
     def text(self, mat):
-        # OBJ is right-handed Y-up by convention; UE's OBJ importer maps (x, y, z)_obj -> (x, -z, y)_ue.
-        # We write UE coordinates converted back so the asset lands Z-up, X-forward.
+        # Verified (UEFN 42.30, StaticMeshTools.import_file): OBJ (x, y, z) lands in UE as (x, -y, z).
+        # So we write UE coordinates with Y negated; Z stays up, X forward.
         L = [f"# uefn-cli meshgen", f"mtllib {mat}.mtl", f"o {mat}"]
         for x, y, z in self.v:
-            L.append(f"v {x:.4f} {z:.4f} {-y:.4f}")
+            L.append(f"v {x:.4f} {-y:.4f} {z:.4f}")
         for u, w in self.vt:
             L.append(f"vt {u:.5f} {1 - w:.5f}")
         for x, y, z in self.vn:
-            L.append(f"vn {x:.5f} {z:.5f} {-y:.5f}")
+            L.append(f"vn {x:.5f} {-y:.5f} {z:.5f}")
         L.append(f"usemtl {mat}")
         L.append("s off")
         for a, b, c in self.f:

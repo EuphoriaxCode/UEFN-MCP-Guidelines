@@ -1,0 +1,91 @@
+{
+ "name": "KitDemo",
+ "at": [
+  0,
+  -1600,
+  384
+ ],
+ "children": [
+  {
+   "name": "Red",
+   "at": [
+    -450,
+    0,
+    60
+   ],
+   "components": {
+    "SGKit-Meshes-SM_SG_cube": {
+     "Main": {
+      "material": "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SGKit/Materials/MI_SG_Red"
+     }
+    }
+   }
+  },
+  {
+   "name": "Green",
+   "at": [
+    -150,
+    0,
+    60
+   ],
+   "components": {
+    "SGKit-Meshes-SM_SG_sphere": {
+     "Main": {
+      "material": "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SGKit/Materials/MI_SG_Green"
+     }
+    }
+   }
+  },
+  {
+   "name": "Blue",
+   "at": [
+    150,
+    0,
+    60
+   ],
+   "components": {
+    "SGKit-Meshes-SM_SG_cylinder": {
+     "Main": {
+      "material": "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SGKit/Materials/MI_SG_Blue"
+     }
+    }
+   }
+  },
+  {
+   "name": "Gold",
+   "at": [
+    450,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    90
+   ],
+   "components": {
+    "SGKit-Meshes-SM_SG_torus": {
+     "Main": {
+      "material": "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/SGKit/Materials/MI_SG_Gold"
+     }
+    }
+   }
+  },
+  {
+   "name": "Ramp",
+   "at": [
+    0,
+    250,
+    0
+   ],
+   "scale": [
+    2,
+    2,
+    1
+   ],
+   "components": {
+    "SGKit-Meshes-SM_SG_wedge": {}
+   }
+  }
+ ]
+}

@@ -111,3 +111,38 @@ Lessons:
 - Server tick (PrePhysics) = **30 Hz**. Spawning 100 entities fits in one frame.
 - Sweep: the first of 6 hits was at distance 0 and not the target cube → investigate (self-hit or initial overlap) in lab 2.
 - `Verse Print` from the server shows in the editor log as `LogVerse: : [..]`.
+
+### E13 ✅ Custom mesh pipeline: OBJ → StaticMesh → material → Verse component (editor + runtime)
+Script: `experiments/e09_mesh_material.py`, meshes from `cli/uefncli/meshgen.py`.
+- **Content root of new projects is `/<plugin-guid>/`**, not `/<ProjectName>/` (create_folder error lists valid roots).
+  `sg.content_root()` derives it from `SceneTools.get_current_level`.
+- `StaticMeshTools.import_file(import_materials=False)` keeps the OBJ `usemtl` name as the slot (`Main`).
+  **Axis mapping: OBJ (x, y, z) → UE (x, −y, z)** (Z stays up, Y mirrored); probe mesh bounds proved it.
+  Winding that renders front-facing (UE coords): `cross(b−a, c−a)` points *against* the outward normal. First attempt
+  rendered cube/cylinder/torus inside-out and the cylinder lying down; fixed generator → all correct (`screenshots/kitdemo_v2.png`).
+- `import_file` **cannot overwrite** ("already exists") → `AssetTools.delete` (check `get_referencers`) then re-import.
+- After `BuildAll` each mesh is a component class `SGKit-Meshes-SM_SG_cube` (`/<guid>/_Verse/Assets.SGKit-Meshes-SM_SG_cube`)
+  with property `Main` (`Assets_material*`), and the material `M_SG_Color` is a Verse class with `var Color/Glow/Roughness/Metallic`.
+- Editor: `SetComponentProperty(Main, <MI asset>)` ❌ "not valid Assets_material". The slot holds an instanced `Assets_material`
+  subobject whose only property is `assetForEditor`; `ObjectTools.set_properties(sub, {"assetForEditor": MI})` ✅ sets and reads back,
+  but ❌ **the editor viewport keeps rendering the mesh's default material** (tried visibility toggle + move). Editor colour preview: open question.
+- **Runtime (Verse) ✅**: `C := SM_SG_cube{Entity := E}; M := M_SG_Color{}; set M.Color = MakeColorFromHSV(30.0*I,1.0,1.0); set C.Main = M`
+  → 12 differently coloured cubes; `set M.Color/Glow` every tick animates live (`screenshots/client_lab2.png`).
+- **Verse access rule**: asset folders are *internal* modules. Code using `SGKit/Meshes` or `SGKit/Materials` must live in `SGKit/`
+  (the parent folder). From `SGLab/` → error 3593 "Invalid access of internal module" + cascades ("expects a value of type false").
+
+### E14 ✅⚠️ Runtime lab 2 (`examples/sg-lab/verse/sgkit/sglab2_device.verse`) — 6/6, two anomalies
+```
+L01 PASS custom mesh + per-entity material instance: 12 coloured cubes
+L02 PASS material animated from TickEvents (hue + glow)
+L03 FindSweepHits breakdown: 14 hits, ALL with SourceHitDistance = 0; 13 "other" entities then TARGET
+L04 PASS mesh EntityEnteredEvent/ExitedEvent between two entities: entered 17, exited 17   (one pass!)
+L05 PASS SetPresentableToPlayers(option{array{}}): readback array of 0; cube invisible in client, sibling sphere visible
+L06 PASS spawn 2000 cube entities: spawn sim-time 0 s, then 24.5 Hz over 2 s   (client: "Performance Warning")
+```
+- **Verse `Left` = Unreal −Y** (verified: teleport to (F, −L, U) put the player in front of the row; hue 0 at Left −660 is on screen-right).
+- `fort_character.TeleportTo` resolves to the old `(Temporary vector3, rotation)` overload; a qualified
+  `(/UnrealEngine.com/Temporary/SpatialMath:)FromVector3` did **not** resolve without `using` → put the teleport in its own file
+  that only uses the old SpatialMath (`sglab_teleport.verse`).
+- Open: sweep distances always 0 (and 13 unrelated hits = number of custom cubes in the scene); enter/exit flicker (17 pairs).
+- Budget: 2000 static cube entities cost ~20 % server tick (30 → 24.5 Hz).

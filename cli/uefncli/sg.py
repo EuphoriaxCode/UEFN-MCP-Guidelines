@@ -29,6 +29,14 @@ ALIASES = {
 }
 
 
+def content_root():
+    """Content mount of the open project, from the level's own path: '/<plugin-guid>' or '/<ProjectName>'."""
+    lvl = api.tool("scene", "get_current_level", {})
+    path = lvl if isinstance(lvl, str) else json.dumps(lvl)
+    m = re.search(r'"?(/[^/"]+)/', path)
+    return m.group(1) if m else None
+
+
 def short(name):
     return SUFFIX.sub("", name)
 
@@ -159,6 +167,16 @@ def get_prop(comp, prop):
     return api.tool(E, "GetComponentProperty", {"component": comp["component"], "propertyName": prop})
 
 
+def set_material(comp, slot, material_path):
+    """Per-instance material on a custom-mesh component (editor). The slot property holds an instanced
+    `Assets_material` subobject; SetComponentProperty rejects assets, but the subobject's `assetForEditor` can be set."""
+    sub = json.loads(get_prop(comp, slot)) if isinstance(get_prop(comp, slot), str) else get_prop(comp, slot)
+    if "." not in material_path.rsplit("/", 1)[-1]:
+        material_path += "." + material_path.rsplit("/", 1)[-1]
+    return api.tool("object", "set_properties", {"instance": sub,
+                                                  "values": json.dumps({"assetForEditor": {"refPath": material_path}})})
+
+
 def create(name, parent=None, xf=None, cls=None):
     a = {"entityClass": {"refPath": cls} if cls else ENTITY_CLASS, "name": name, "transform": (xf or Xf()).to_json()}
     if parent:
@@ -233,7 +251,10 @@ def apply(spec, parent_path=None, prune=False, log=print, scene=None):
             cls = comp_class(cname)
             c = have.get(cls) or add_comp(ent, cname)
             for p, v in (props or {}).items():
-                r = set_prop(c, p, v)
+                if isinstance(v, dict) and set(v) == {"material"}:  # {"Main": {"material": "/Root/Mats/MI_Red"}}
+                    r = set_material(c, p, v["material"])
+                else:
+                    r = set_prop(c, p, v)
                 if r is False:
                     log(f"  ! {n['name']}.{cname}.{p} rejected")
         if n.get("children") is not None:

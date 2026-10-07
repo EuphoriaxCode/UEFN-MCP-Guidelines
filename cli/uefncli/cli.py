@@ -160,10 +160,30 @@ def c_log(a):
         print(l[:a.width])
 
 
+def _pose(at, look=None, rot=None, cur=None):
+    """camera pose from --at + (--look point | --rot p,y,r); missing --at keeps the current camera location."""
+    import math
+    loc = parse_vec(at, None)
+    if loc is None:
+        cur = cur or api.tool("editor", "GetCameraTransform")
+        loc = (cur["location"]["x"], cur["location"]["y"], cur["location"]["z"])
+    if look:
+        tx, ty, tz = parse_vec(look, (0, 0, 0))
+        dx, dy, dz = tx - loc[0], ty - loc[1], tz - loc[2]
+        r = (math.degrees(math.atan2(dz, math.hypot(dx, dy))), math.degrees(math.atan2(dy, dx)), 0.0)
+    else:
+        r = parse_vec(rot, (0, 0, 0))
+    return {"location": dict(zip("xyz", loc)), "rotation": dict(zip(("pitch", "yaw", "roll"), r)),
+            "scale": {"x": 1, "y": 1, "z": 1}}
+
+
 def c_shot(a):
+    """Capture from the editor viewport camera, or from an explicit pose (--at/--look) without moving the camera."""
     args = {}
     if a.labels:
-        args["bShowActorLabels"] = True
+        args["annotations"] = {}
+    if a.at or a.look:
+        args["captureTransform"] = _pose(a.at, a.look, a.rot)
     r, images = api.tool_images("editor", "CaptureViewport", args)
     if not images:
         out(r)
@@ -177,20 +197,7 @@ def c_cam(a):
     if a.at is None and a.look is None:
         out(api.tool("editor", "GetCameraTransform"))
         return
-    cur = api.tool("editor", "GetCameraTransform")
-    loc = parse_vec(a.at, None)
-    if loc is None:
-        l = cur["location"] if "location" in cur else cur
-        loc = (l["x"], l["y"], l["z"])
-    if a.look:
-        import math
-        tx, ty, tz = parse_vec(a.look, (0, 0, 0))
-        dx, dy, dz = tx - loc[0], ty - loc[1], tz - loc[2]
-        rot = (math.degrees(math.atan2(dz, math.hypot(dx, dy))), math.degrees(math.atan2(dy, dx)), 0)
-    else:
-        rot = parse_vec(a.rot, (0, 0, 0))
-    xf = {"location": dict(zip("xyz", loc)), "rotation": dict(zip(("pitch", "yaw", "roll"), rot))}
-    out(api.tool("editor", "SetCameraTransform", {"transform": xf} if a.wrap else xf))
+    out(api.tool("editor", "SetCameraTransform", {"transform": _pose(a.at, a.look, a.rot)}))
 
 
 # ------------------------------------------------------------------ verse
@@ -211,7 +218,7 @@ def c_verse(a):
     elif a.op == "grep":
         out(api.tool("verse", "Grep", {"pattern": a.path, "path": a.dest or ""}))
     elif a.op == "rm":
-        out(api.tool("verse", "Delete", {"path": a.path}))
+        out(api.tool("verse", "Delete", {"path": a.path, "bRecursive": False}))
     elif a.op == "push":  # local file(s) -> project path
         files = sorted(glob.glob(a.path)) if any(ch in a.path for ch in "*?") else [a.path]
         dest = a.dest or project_root()
@@ -234,7 +241,14 @@ def c_build(a):
     if not diags:
         print(f"BUILD OK ({time.time() - t0:.1f}s)")
         return
-    out(diags)
+    if isinstance(diags, list):
+        for d in diags:
+            sp = d.get("span", {})
+            f = d.get("filePath", "").rsplit("/", 1)[-1]
+            print(f"{d.get('severity', '?')[0]} {f}:{sp.get('startLine', -1) + 1}:{sp.get('startCharacter', -1) + 1} "
+                  f"[{d.get('code')}] {d.get('message', '')[:300]}")
+    else:
+        out(diags)
     sys.exit(1)
 
 
@@ -436,9 +450,11 @@ def main(argv=None):
     x.set_defaults(f=c_log)
     x = s.add_parser("shot", help="capture the editor viewport to a PNG")
     x.add_argument("out", nargs="?", default="viewport.png"); x.add_argument("--labels", action="store_true")
+    x.add_argument("--at", help="capture from x,y,z (camera not moved)"); x.add_argument("--look", help="aim at x,y,z")
+    x.add_argument("--rot", help="or explicit pitch,yaw,roll")
     x.set_defaults(f=c_shot)
     x = s.add_parser("cam", help="get/set the editor camera; --look x,y,z aims at a point")
-    x.add_argument("--at"); x.add_argument("--rot"); x.add_argument("--look"); x.add_argument("--wrap", action="store_true")
+    x.add_argument("--at"); x.add_argument("--rot"); x.add_argument("--look")
     x.set_defaults(f=c_cam)
 
     x = s.add_parser("verse", help="ls|cat|grep|rm|push|build Verse files")

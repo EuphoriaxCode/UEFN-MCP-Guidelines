@@ -11,9 +11,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from uefncli import api, sg  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJ = os.environ.get("UEFN_PROJECT", "SceneGraphMCP")
-MESHES = f"/{PROJ}/SGKit/Meshes"
-MATS = f"/{PROJ}/SGKit/Materials"
+ROOT = sg.content_root()  # e.g. /ca93dbca-6f58-4ce8-9bd2-c953b1864acf (new projects mount content under the plugin GUID)
+MESHES = f"{ROOT}/SGKit/Meshes"
+MATS = f"{ROOT}/SGKit/Materials"
 MT = "material"
 
 
