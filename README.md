@@ -12,7 +12,11 @@ Start every UEFN/MCP task with something like:
 
 | File | What |
 |---|---|
+| [`MISSION.md`](MISSION.md) | The standing brief: how to keep exploring, what's on the backlog, where results go |
 | [`MCP_RULES.md`](MCP_RULES.md) | **Short must-follow checklist** (paste this into the agent's context) |
+| [`cli/`](cli) | **`uefn` CLI** — drive the editor from the terminal: Scene Graph tree/apply/dump/stamp, Verse build, sessions, logs, screenshots |
+| [`catalog/`](catalog) | Generated reference: all 30 toolsets with input/output schemas, Scene Graph component atlas, Verse API summaries |
+| [`experiments/LOG.md`](experiments/LOG.md) | Lab notebook: every experiment (incl. failures and crashes) with the exact command and result |
 | [`topics/mcp-toolsets.md`](topics/mcp-toolsets.md) | Which toolset does what, sandbox limits, asset/class paths |
 | [`topics/umg-widgets.md`](topics/umg-widgets.md) | Building Widget Blueprints, Verse fields, bindings, glyph numbers |
 | [`topics/clicks-and-input.md`](topics/clicks-and-input.md) | Clickable menus that actually work, Escape, never trapping the mouse |
