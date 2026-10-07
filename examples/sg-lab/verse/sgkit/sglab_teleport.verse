@@ -17,6 +17,12 @@ SGLabCharPos(Char:fort_character)<transacts>:string =
 SGLabCharVec(Char:fort_character)<transacts>:(/Verse.org/SpatialMath:)vector3 =
     FromVector3(Char.GetTransform().Translation)
 
+# Camera ray of a character (eye position + forward direction) in /Verse.org/SpatialMath types.
+SGLabViewRay(Char:fort_character)<transacts>:tuple((/Verse.org/SpatialMath:)vector3, (/Verse.org/SpatialMath:)vector3) =
+    Loc := FromVector3(Char.GetViewLocation())
+    Rot:(/Verse.org/SpatialMath:)rotation = FromRotation(Char.GetViewRotation())
+    (Loc, Rot.GetForwardAxis())
+
 # Teleport to (X forward, Y right, Z up) in Unreal world units, facing YawDegrees.
 SGLabTeleport(Char:fort_character, X:float, Y:float, Z:float, YawDegrees:float)<transacts><decides>:void =
     Char.TeleportTo[(/UnrealEngine.com/Temporary/SpatialMath:)vector3{X := X, Y := Y, Z := Z},

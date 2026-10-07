@@ -246,3 +246,13 @@ C04 AddCamera succeeded; holding for 12 s  ...  camera released
 - `Bandage_BR_CH5S1_Common{}` (from `/Fortnite.com/Items`) spawns into the world as an entity with 8 components
   (pickup behaviour not yet verified by a human).
 - Generators (`FindDescendantComponents` results) have no `.First`/indexing → materialise with `for (X : Gen) {X}` first.
+
+### E23 ✅ Paint Blaster: input hooks + hand-integrated projectiles + runtime repaint (`examples/paint-blaster`)
+- Non-experimental input actions available to Verse (`/Fortnite.com/Input/Character`): `Jump, Crouch, Sprint` (TraversalMapping),
+  `WeaponPrimary, WeaponSecondary, Reload` (RangedWeaponMapping). `Move` (vector3) and `Interact` are **experimental**.
+- Subscribing `GetPlayerInput[P].GetInputEvents(Jump).TriggerActivationEvent` works (log line); real presses need a human.
+- Projectile = entity moved each `PostPhysics` tick by `Velocity*Dt`, collision via `Entity.FindSweepHits(Step)` excluding itself.
+  AutoFire self-test: **8 shots, 8 hits, 8 painted**; contact points exactly on the targets' front faces.
+- Editor-placed entities with kit meshes can be repainted at runtime: `GetComponent[SM_SG_cube]` → `set Mesh.Main = M_SG_Color{}`.
+- View ray: `FromRotation(fort_character.GetViewRotation()).GetForwardAxis()` (in the bridge file; type-annotate the
+  converted rotation as `(/Verse.org/SpatialMath:)rotation` so `GetForwardAxis` resolves).
