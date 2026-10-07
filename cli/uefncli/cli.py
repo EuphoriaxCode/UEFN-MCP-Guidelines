@@ -287,6 +287,10 @@ def c_build(a):
             f = d.get("filePath", "").rsplit("/", 1)[-1]
             print(f"{d.get('severity', '?')[0]} {f}:{sp.get('startLine', -1) + 1}:{sp.get('startCharacter', -1) + 1} "
                   f"[{d.get('code')}] {d.get('message', '')[:300]}")
+        errors = [d for d in diags if str(d.get("severity", "")).lower().startswith("err")]
+        if not errors:
+            print(f"BUILD OK with {len(diags)} warning(s) ({time.time() - t0:.1f}s)")
+            return
     else:
         out(diags)
     sys.exit(1)

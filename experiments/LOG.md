@@ -229,3 +229,20 @@ Q04 PASS orb follows the character via TickEvents.PostPhysics: gap 0.000000 cm a
   Edited the template (taller pole, moved bulb/shade, Intensity 300→800, new `Cap` child) → `sg propagate`:
   `created 3, updated 15, instances 3`; read-back: all bulbs at local z 210 with Intensity 800, LampRed's bulb still red,
   all three have `Cap` (`examples/spec-prefabs/lamps_propagated.png`).
+
+### E22 ✅ Scene Graph camera takes over the player view; items as entities (`sglab5_device.verse`)
+```
+C01 player: 3 components, 0 child entities, 0 inventory components, 0 items
+C02 no inventory_component under the player
+C03 bandage entity in world: 8 components, 0 children, at (-1900, 0, 500)
+C04 camera directors under player: 1
+C04 AddCamera succeeded; holding for 12 s  ...  camera released
+```
+- **Every player has a `camera_director_component`.** `Director.AddCamera[perspective_camera_component, 100]` switched the client
+  to our camera (top-down over the floor game, `screenshots/lab5_sheet.jpg`); `Handle.Cancel()` gave the view back.
+  Experimental: compiles with **warning 2304** "… is experimental, and its use will prevent you from publishing your project".
+- `uefn build` now treats warnings as success (it used to exit 1 on any diagnostic).
+- The player entity has **no `inventory_component`** → `inventory_component.AddItem` can't target Fortnite inventories this way (42.30).
+- `Bandage_BR_CH5S1_Common{}` (from `/Fortnite.com/Items`) spawns into the world as an entity with 8 components
+  (pickup behaviour not yet verified by a human).
+- Generators (`FindDescendantComponents` results) have no `.First`/indexing → materialise with `for (X : Gen) {X}` first.
