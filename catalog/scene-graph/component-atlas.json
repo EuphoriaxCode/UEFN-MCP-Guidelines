@@ -4615,5 +4615,104 @@
   "name": "UI_grid_container_component",
   "error": "CRASH: EntityToolset.AddComponent on a fresh entity crashed the editor (EXCEPTION_ACCESS_VIOLATION reading 0x48), UEFN 42.30, 2026-10-07",
   "crash": true
+ },
+ "/VerseVoiceTextChat/_Verse/VNI/VerseVoiceTextChat.voice_manager_component": {
+  "props": [],
+  "auto_added": [],
+  "name": "voice_manager_component",
+  "secs": 0.13
+ },
+ "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_state_indicator_component": {
+  "props": [
+   {
+    "name": "OnOffset",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":0,\"up\":9}",
+    "bReadOnly": false
+   },
+   {
+    "name": "OffOffset",
+    "type": "FSpatialMath_vector3",
+    "value": "{\"forward\":0,\"left\":0,\"up\":-9}",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "LampShowroom-lamp_state_indicator_component",
+  "secs": 0.08
+ },
+ "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_switch_component": {
+  "props": [
+   {
+    "name": "CanInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x3BA27C8E_DefaultCanInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "CannotInteractMessage",
+    "type": "Verse_message*",
+    "value": "{\"refPath\":\"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x7070DA31_DefaultCannotInteractMessage\"}",
+    "bReadOnly": false
+   },
+   {
+    "name": "Cooldown",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "CooldownPerAgent",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "SuccessLimit",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "InteractableDuration",
+    "type": "TOptional",
+    "value": "null",
+    "bReadOnly": false
+   },
+   {
+    "name": "Enabled",
+    "type": "bool",
+    "value": "true",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "LampShowroom-lamp_switch_component",
+  "secs": 0.09
+ },
+ "/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_toggle_component": {
+  "props": [
+   {
+    "name": "InitiallyOn",
+    "type": "bool",
+    "value": "false",
+    "bReadOnly": false
+   },
+   {
+    "name": "LightColor",
+    "type": "FColors_color",
+    "value": "{\"r\":1.0000177215462358,\"g\":0.99992620095021367,\"b\":0.99992685905047418}",
+    "bReadOnly": false
+   },
+   {
+    "name": "DebugLabel",
+    "type": "Verse::FNativeString",
+    "value": "\"Lamp\"",
+    "bReadOnly": false
+   }
+  ],
+  "auto_added": [],
+  "name": "LampShowroom-lamp_toggle_component",
+  "secs": 0.1
  }
 }

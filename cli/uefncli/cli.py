@@ -69,6 +69,22 @@ def c_wait(a):
     sys.exit(f"timeout after {a.timeout}s")
 
 
+PERF = {"refPath": "/Script/UnrealEd.Default__EditorPerformanceSettings"}
+
+
+def c_turbo(a):
+    """The editor throttles to ~3 FPS when not focused and serves one MCP call per frame (~333 ms/call).
+    Turning bThrottleCPUWhenNotForeground off (in memory only; resets on restart) makes calls ~15 ms."""
+    if a.state in ("on", "off"):
+        api.tool("object", "set_properties", {"instance": PERF, "values": json.dumps({"bThrottleCPUWhenNotForeground": a.state == "off"})})
+    t0 = time.time()
+    for _ in range(5):
+        api.tool("entity", "FindEntities", {"nameFilter": "__none__"})
+    ms = (time.time() - t0) / 5 * 1000
+    v = api.tool("object", "get_properties", {"instance": PERF, "properties": ["bThrottleCPUWhenNotForeground"]})
+    out({"throttle_when_background": v, "ms_per_call": round(ms, 1)})
+
+
 def c_toolsets(a):
     out(api.toolset_names(refresh=True))
 
@@ -203,7 +219,7 @@ def c_verse(a):
             with open(lf, encoding="utf-8") as f:
                 content = f.read()
             target = dest.rstrip("/") + "/" + os.path.basename(lf) if not dest.endswith(".verse") else dest
-            api.tool("verse", "WriteFile", {"path": target, "content": content})
+            api.tool("verse", "WriteFile", {"path": target, "content": content, "bCreateIfMissing": True})
             print("wrote", target)
         if a.build:
             return c_build(a)
@@ -396,6 +412,8 @@ def main(argv=None):
     x = s.add_parser("wait", help="block until the editor's MCP server is up (e.g. after a crash/restart)")
     x.add_argument("--timeout", type=float, default=1800); x.add_argument("--interval", type=float, default=5)
     x.set_defaults(f=c_wait)
+    x = s.add_parser("turbo", help="on = stop the background 3 FPS throttle (~20x faster MCP calls, until restart)")
+    x.add_argument("state", nargs="?", choices=["on", "off"]); x.set_defaults(f=c_turbo)
     s.add_parser("toolsets", help="list toolsets").set_defaults(f=c_toolsets)
     x = s.add_parser("describe", help="list tools of a toolset, or one tool's schema")
     x.add_argument("toolset"); x.add_argument("tool", nargs="?"); x.set_defaults(f=c_describe)
@@ -447,6 +465,8 @@ def main(argv=None):
     x.add_argument("--set", action="append", help="stamp: override Child/Path.component.Property=json (root: .comp.Prop=..)")
     x.set_defaults(f=c_sg)
 
+    # Git Bash (MSYS) rewrites arguments that start with "/" into Windows paths: undo that for Verse/asset paths.
+    argv = [re.sub(r"^[A-Za-z]:/Program Files/Git(?=/)", "", s) for s in (argv if argv is not None else sys.argv[1:])]
     a = p.parse_args(argv)
     if getattr(a, "comp_opt", None):
         a.comp = a.comp_opt

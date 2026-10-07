@@ -12,6 +12,28 @@ Project needs `"sceneGraph": {"bIsSceneGraphSystemAllowed": true}` in the `.uefn
 | `Get/SetEntityTransform` (world space) | |
 | `ListEntityClasses` / `ListComponentClasses` (also lists prefab classes, `bIsPrefab`) | |
 
+## What exists (Oct 2026 inventory, `catalog/scene-graph/`)
+- **~179 component classes, 152 attachable and recorded** with their editable properties in
+  [`component-atlas.md`](../catalog/scene-graph/component-atlas.md). 64 are **Verse-visible**; the rest are editor-only
+  (placeable via the toolset, invisible to Verse): `text_display_component` (3D world text), `decal_component`,
+  `rigid_body_component`, `physics_component`, `tag_component`, `modular_vehicle_*`/`vehicle_*`, `RenderSettings_*`,
+  `damageable_component`, `UI_*` scene-graph widgets, navigation, inventory internals.
+- **1501 entity classes**, 1442 of them `EntityItems/_Verse.Items-*` (every BR/Creative item as an entity class).
+- Hazard: `AddComponent(UI_grid_container_component)` on a bare entity **crashes the editor**.
+
+## Assets that turn into components
+| Asset in the project | Verse class generated in `<Project>-Assets.digest.verse` | Why it matters |
+|---|---|---|
+| Static mesh | `<Mesh> := class<final>(mesh_component)` + one `@editable var <Slot>:material` per material slot, and `<Mesh>_asset:mesh` | recolour per entity (BasicShapes have no slots) |
+| Material | `<Mat> := class(material)` with its parameters as fields | per-instance parameters from Verse |
+| Niagara system | `<Sys> := class<final>(particle_system_component)` | spawn VFX as components (`Play()/Stop()`) |
+| Prefab | entity class with `bIsPrefab` (listed by `ListEntityClasses`) | `CreateEntity(entityClass=<prefab>)` instances |
+
+## Speed
+- One MCP call = one editor frame. A background editor throttles to ~3 FPS → **333 ms per call**.
+  `uefn turbo on` (sets `EditorPerformanceSettings.bThrottleCPUWhenNotForeground=false` in memory) → ~10 ms per call.
+- Large builds: `uefn sg build spec.json` sends the whole tree in one `execute_tool_script` call.
+
 ## Gotchas (symptom → cause → fix)
 - **Children end up at double the offset** → `CreateEntity` with `parentEntity` treats `transform` as the **local** transform,
   while `SetEntityTransform` is **world**. → Pass local offsets to `CreateEntity`, or fix afterwards with `SetEntityTransform` (world).

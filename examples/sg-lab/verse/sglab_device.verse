@@ -54,11 +54,11 @@ sglab_device<public> := class(creative_device):
             set Failed += 1
             Print("[SGLab] {Id} FAIL {Name}: {Detail}")
 
-    One():vector3 = vector3{Forward := 1.0, Left := 1.0, Up := 1.0}
+    One()<computes>:vector3 = vector3{Forward := 1.0, Left := 1.0, Up := 1.0}
 
-    At(P:vector3):transform = transform{Translation := P, Rotation := IdentityRotation(), Scale := One()}
+    At(P:vector3)<transacts>:transform = transform{Translation := P, Rotation := IdentityRotation(), Scale := One()}
 
-    V(F:float, L:float, U:float):vector3 = vector3{Forward := F, Left := L, Up := U}
+    V(F:float, L:float, U:float)<computes>:vector3 = vector3{Forward := F, Left := L, Up := U}
 
     # A cube entity under Parent at a LOCAL offset.
     SpawnCube(Parent:entity, Local:vector3):entity =
@@ -68,7 +68,7 @@ sglab_device<public> := class(creative_device):
         E.SetLocalTransform(At(Local))
         E
 
-    Fmt(P:vector3):string = "({P.Forward}, {P.Left}, {P.Up})"
+    Fmt(P:vector3)<transacts>:string = "({P.Forward}, {P.Left}, {P.Up})"
 
     # ------------------------------------------------------------ experiments
     R01_Spawn(Root:entity):void =
@@ -102,14 +102,14 @@ sglab_device<public> := class(creative_device):
         Report("R03", Ok, "FindOverlapHits", "hits {Count}, of which on B {HitsB}")
 
     R04_Sweep(Root:entity):void =
-        Floor := SpawnCube(Root, V(800.0, 0.0, 0.0))
+        FloorCube := SpawnCube(Root, V(800.0, 0.0, 0.0))
         Probe := SpawnCube(Root, V(800.0, 0.0, 500.0))
         var First:string = "none"
         var N:int = 0
         for (Hit : Probe.FindSweepHits(V(0.0, 0.0, -1000.0))):
             set N += 1
             if (N = 1):
-                IsFloor := if (Hit.TargetComponent.Entity = Floor) then "yes" else "no"
+                IsFloor := if (Hit.TargetComponent.Entity = FloorCube) then "yes" else "no"
                 set First = "dist {Hit.SourceHitDistance} normal {Fmt(Hit.ContactNormal)} isFloor {IsFloor}"
         Report("R04", if (N > 0) then true else false, "FindSweepHits down 1000", "{N} hits; first {First}")
 

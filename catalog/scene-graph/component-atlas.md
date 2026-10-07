@@ -1479,3 +1479,42 @@ Add failed: `CRASH: EntityToolset.AddComponent on a fresh entity crashed the edi
 
 _no editable properties_
 
+## VerseVoiceTextChat
+
+### `voice_manager_component`
+`/VerseVoiceTextChat/_Verse/VNI/VerseVoiceTextChat.voice_manager_component` — editor-only (not in Verse digests)
+
+_no editable properties_
+
+## ca93dbca-6f58-4ce8-9bd2-c953b1864acf
+
+### `LampShowroom-lamp_state_indicator_component`
+`/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_state_indicator_component` — editor-only (not in Verse digests)
+
+| property | type | default | ro |
+|---|---|---|---|
+| `OnOffset` | `FSpatialMath_vector3` | `{"forward":0,"left":0,"up":9}` |  |
+| `OffOffset` | `FSpatialMath_vector3` | `{"forward":0,"left":0,"up":-9}` |  |
+
+### `LampShowroom-lamp_switch_component`
+`/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_switch_component` — editor-only (not in Verse digests)
+
+| property | type | default | ro |
+|---|---|---|---|
+| `CanInteractMessage` | `Verse_message*` | `{"refPath":"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x3BA27C8E_DefaultCanInteractMessage"}` |  |
+| `CannotInteractMessage` | `Verse_message*` | `{"refPath":"/EntityInteract/_Verse/VNI/EntityInteract.Default___Root:__verse_0x7070DA31_DefaultCannotInteractMessage"}` |  |
+| `Cooldown` | `TOptional` | `null` |  |
+| `CooldownPerAgent` | `TOptional` | `null` |  |
+| `SuccessLimit` | `TOptional` | `null` |  |
+| `InteractableDuration` | `TOptional` | `null` |  |
+| `Enabled` | `bool` | `true` |  |
+
+### `LampShowroom-lamp_toggle_component`
+`/ca93dbca-6f58-4ce8-9bd2-c953b1864acf/_Verse.LampShowroom-lamp_toggle_component` — editor-only (not in Verse digests)
+
+| property | type | default | ro |
+|---|---|---|---|
+| `InitiallyOn` | `bool` | `false` |  |
+| `LightColor` | `FColors_color` | `{"r":1.0000177215462358,"g":0.99992620095021367,"b":0.99992685905047418}` |  |
+| `DebugLabel` | `Verse::FNativeString` | `"Lamp"` |  |
+

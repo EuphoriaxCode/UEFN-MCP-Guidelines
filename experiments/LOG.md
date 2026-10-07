@@ -64,3 +64,50 @@ Append-only lab notebook. Format: **goal → run → result → lesson**. UEFN 4
   Remaining unprobed: the other `UI_*` widget components, `voice_manager_component`.
 - Also: `keyframed_movement_component` has **no** editor-editable properties → keyframes must be set from Verse.
 - `text_display_component` editables: `Enabled, Message (message ref), Font, Color, VisibleDistance{minimum,maximum}, FadeInTime, FadeOutTime`.
+
+### E09 ✅ VFX assets become components too
+- Observed in `Blindshot-Assets.digest.verse`: a Niagara system asset generates `LaserBeam_Niagara := class<final>(particle_system_component)`.
+  So: create a Niagara system (NiagaraToolset_System) → Verse can construct it as a component on any entity.
+- No generated `sound_component` subclasses were found in any older project digest (sounds may need a different asset type; open question).
+
+### E10 ✅ 20–40× faster MCP: disable background throttling
+- Symptom: every MCP call took exactly **333 ms** (`FindEntities` ×15). Cause: the editor runs ~3 FPS when not the foreground
+  app and serves one MCP request per frame.
+- Run: `uefn call object set_properties '{"instance":{"refPath":"/Script/UnrealEd.Default__EditorPerformanceSettings"},"values":"{\"bThrottleCPUWhenNotForeground\":false}"}'`
+- Result: 333 ms → **8–20 ms** per call. In-memory only (resets on editor restart). Now `uefn turbo on`.
+- Lesson: run `uefn turbo on` at the start of every session.
+
+### E11 ⚠️ Shell/tool papercuts
+- Git Bash rewrites arguments that start with `/` into Windows paths (`/ca93…` → `C:/Program Files/Git/ca93…`). The CLI now undoes this.
+- `VerseToolset.WriteFile` requires `bCreateIfMissing`; `ListFiles` requires `bRecursive`.
+- Verse: helper functions called inside `if (...)` / `for (...)` headers must be `<computes>`/`<transacts>` (error 3512);
+  a local named `Floor` collides with the built-in `Floor()` (errors 3532/3588).
+- `entity{}`, `transform_component{Entity := E}`, `cube{Entity := E}` (BasicShapes), `keyframed_movement_component{Entity := E}`,
+  `sphere_light_component{Entity := E}`, custom `class(tag)`, custom `class(scene_event)` all **compile** (runtime results: E12).
+
+### E08b ✅ Atlas finished
+- 152 classes recorded. The remaining `UI_*` widget components were deliberately skipped (same family as the crash, and editor-only).
+
+### E12 ✅ Runtime Scene Graph battery — 11/11 PASS (`examples/sg-lab`)
+Session started with `uefn session start` (82 s), results via `uefn log "\[SGLab\]"`. Lines verbatim:
+```
+R01 PASS spawn entity+cube at runtime: global (2500, 0, 450) meshes under root 1
+R02 PASS tags + hierarchy query: with base tag 2 (want 2), red 1 (want 1), A has base via subclass: yes
+R03 PASS FindOverlapHits: hits 4, of which on B 1
+R04 PASS FindSweepHits down 1000: 6 hits; first dist 0 normal (0,0,1) isFloor no
+R05 PASS SendDown/SendUp + OnReceive: parent got 2, child got 2 (want 2/2); consumed down=0 up=0
+R06 PASS re-parent with AddEntities: GLOBAL kept: before (3900,0,600) after (3900,0,600) local after (0,-500,-150)
+R07 PASS spawn 100 cubes in one frame: 100 meshes, sim time delta 0
+R08 PASS RemoveFromParent + re-add: no parent, re-added
+R09 PASS keyframed movement oneshot (+300 up then +300 left): moved (0, 300, 300)
+R10 PASS TickEvents.PrePhysics: 90 ticks in 3.005 s = 29.95 Hz
+R11 PASS runtime sphere_light_component: lights under root 1
+```
+Lessons:
+- Runtime construction pattern that works: `E := entity{}; E.AddComponents(array{transform_component{Entity := E}, cube{Entity := E}}); Parent.AddEntities(array{E}); E.SetLocalTransform(...)`.
+- Tag queries respect the tag class hierarchy (`FindDescendantEntitiesWithTag(base)` finds subclass tags too).
+- `AddEntities` re-parenting **keeps the global transform**.
+- Keyframed movement deltas are **cumulative and in parent space** (the 90° yaw of delta 1 did not rotate delta 2).
+- Server tick (PrePhysics) = **30 Hz**. Spawning 100 entities fits in one frame.
+- Sweep: the first of 6 hits was at distance 0 and not the target cube → investigate (self-hit or initial overlap) in lab 2.
+- `Verse Print` from the server shows in the editor log as `LogVerse: : [..]`.
