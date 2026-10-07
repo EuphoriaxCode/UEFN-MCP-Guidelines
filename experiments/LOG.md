@@ -219,3 +219,13 @@ Q04 PASS orb follows the character via TickEvents.PostPhysics: gap 0.000000 cm a
 - `PushChanges(bVerseOnly=true)` while the game runs → "The Refresh command is not currently available"; a full push works
   (CLI `session restart --verse-only` now falls back automatically).
 - Verse `Print` lines show on the client HUD in play-tests (top-left), handy for screenshots.
+
+### E21 ✅ CLI fast build + spec prefabs verified live
+- `uefn sg build maze12.json` (from `examples/procgen/maze.py 12 12 --seed 7`): **128 entities + 128 components in 5.9 s,
+  one `execute_tool_script` round-trip, 0 errors** (`examples/procgen/maze_12x12.png`). ~23 ms per inner tool call —
+  not faster than turbo MCP calls, but immune to the 333 ms background throttle.
+- Spec prefabs (`examples/spec-prefabs/lamp.json`): `sg stamp` ×3 with overrides (shade material per lamp via
+  `{"material": MI}`, red bulb colour on one) → sidecar `lamp.instances.json` records transforms + overrides.
+  Edited the template (taller pole, moved bulb/shade, Intensity 300→800, new `Cap` child) → `sg propagate`:
+  `created 3, updated 15, instances 3`; read-back: all bulbs at local z 210 with Intensity 800, LampRed's bulb still red,
+  all three have `Cap` (`examples/spec-prefabs/lamps_propagated.png`).
