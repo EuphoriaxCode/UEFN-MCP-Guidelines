@@ -271,6 +271,31 @@ def _tree_lines(scene, ref, depth, comps, maxdepth):
     return lines
 
 
+def sg_build_fast(spec, parent_ref=None):
+    names = set()
+
+    def walk(nodes):
+        for n in nodes if isinstance(nodes, list) else [nodes]:
+            names.update((n.get("components") or {}).keys())
+            walk(n.get("children") or [])
+    walk(spec)
+    classes = {n: sg.comp_class(n) for n in names}
+    with open(os.path.join(LIBS, "sg_build.py"), encoding="utf-8") as f:
+        lib = f.read()
+    script = (lib + "\n\nSPEC = json.loads(" + repr(json.dumps(spec)) + ")\nPARENT = " + repr(parent_ref) +
+              "\nCOMP_CLASSES = json.loads(" + repr(json.dumps(classes)) + ")\n")
+    t0 = time.time()
+    r = api.tool("script", "execute_tool_script", {"script": script})
+    if isinstance(r, str):
+        try:
+            r = json.loads(r)
+        except ValueError:
+            pass
+    if isinstance(r, dict):
+        r["seconds"] = round(time.time() - t0, 2)
+    return r
+
+
 def c_sg(a):
     scene = sg.Scene()
     op = a.op
@@ -335,6 +360,19 @@ def c_sg(a):
         nx = Xf(parse_vec(a.at, cur.loc), parse_vec(a.rot, cur.rot), parse_vec(a.scale, cur.scale))
         (sg.set_world(e, nx) if a.world else sg.set_local(scene, e, nx))
         print("world", sg.world(e))
+    elif op == "stamp":  # sg stamp template.json Parent/Name --at .. --set Bulb.light.Intensity=400
+        ov = {}
+        for s_ in a.set or []:
+            rel, comp, prop, v = sg.parse_override(s_)
+            ov.setdefault(rel, {}).setdefault(comp, {})[prop] = v
+        st = sg.stamp(a.target, a.comp, parse_vec(a.at, None), parse_vec(a.rot, None),
+                      parse_vec(a.scale, None) if a.scale else None, ov)
+        out(st)
+    elif op == "propagate":
+        out(sg.propagate(a.target, a.prune))
+    elif op == "build":  # create-only, whole spec in ONE sandbox call (fast path for big generated scenes)
+        spec = load_args("@" + a.target) if not a.target.lstrip().startswith(("{", "[")) else json.loads(a.target)
+        out(sg_build_fast(spec, scene.resolve(a.parent)["entity"]["refPath"] if a.parent else None))
     elif op == "apply":
         spec = load_args("@" + a.target)
         st = sg.apply(spec, a.parent, a.prune, scene=scene)
@@ -394,9 +432,9 @@ def main(argv=None):
     x.add_argument("op", choices=["status", "start", "stop", "push", "game-start", "game-stop", "restart"])
     x.add_argument("--verse-only", action="store_true"); x.set_defaults(f=c_session)
 
-    x = s.add_parser("sg", help="Scene Graph: tree|classes|comps|props|get|set|add|rmcomp|new|rm|xf|apply|dump|atlas")
+    x = s.add_parser("sg", help="Scene Graph: tree|classes|comps|props|get|set|add|rmcomp|new|rm|xf|apply|dump|atlas|stamp|propagate")
     x.add_argument("op", choices=["tree", "classes", "comps", "props", "get", "set", "add", "rmcomp", "new", "rm", "xf",
-                                  "apply", "dump", "atlas"])
+                                  "apply", "dump", "atlas", "stamp", "propagate", "build"])
     x.add_argument("target", nargs="?", help="entity path (Showroom/BackWall), class filter, or spec file")
     x.add_argument("comp", nargs="?"); x.add_argument("prop", nargs="?"); x.add_argument("value", nargs="?")
     x.add_argument("--comps", action="store_true", help="tree: show components")
@@ -406,6 +444,7 @@ def main(argv=None):
     x.add_argument("--comp", dest="comp_opt"); x.add_argument("--cls", help="new: entity class refPath (e.g. a prefab)")
     x.add_argument("--parent", help="apply: parent entity path"); x.add_argument("--prune", action="store_true")
     x.add_argument("--props", action="store_true", help="dump: include property values")
+    x.add_argument("--set", action="append", help="stamp: override Child/Path.component.Property=json (root: .comp.Prop=..)")
     x.set_defaults(f=c_sg)
 
     a = p.parse_args(argv)

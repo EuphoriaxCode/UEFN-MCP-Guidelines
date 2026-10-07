@@ -92,6 +92,23 @@ Details + evidence live in `topics/`. **If a rule here conflicts with your insti
 - Find parts by component type (`FindDescendantComponents`), never by entity name.
 - `OnBeginSimulation` re-runs on session start and Stop/Start Game → apply initial state there.
 
+- **Never `AddComponent(UI_grid_container_component)` on a bare entity — it crashes the editor** (access violation). Don't bulk-probe `UI_*` components.
+- 86 of the ~150 attachable component classes are **editor-only** (not in the Verse digests): `text_display_component`, `decal_component`,
+  `rigid_body_component`, `tag_component`, `modular_vehicle_*`, `RenderSettings_*`… Place them with the toolset; Verse can't reference them.
+  Check `catalog/scene-graph/component-atlas.md` ("Verse ✅") before planning runtime logic around a component.
+- `keyframed_movement_component` has no editor properties → keyframes come from Verse `SetKeyframes`.
+- Custom static meshes become `class(mesh_component)` with `@editable var <Slot>:material` per material slot → recolourable;
+  `BasicShapes.*` have no slots. Niagara systems become `class(particle_system_component)`.
+
+## 9a. Discovery & tooling (use the CLI: `cli/README.md`)
+- Read `catalog/` before calling a tool you haven't used: every toolset's inputs AND outputs are there.
+- Verse API: `uefn digest <Module>` / `--grep` / `--class`. Project digests exist only while the editor is open;
+  `VerseProject/FortniteGame/Digests/BuiltIn` is a persistent copy of the built-in ones.
+- Toolsets registered in the log but not in `list_toolsets` (PCG, Cheats, ConfigSettings, StateTree, SourceControl…) are NOT reachable.
+- `VerseToolset.ListFiles` requires `bRecursive`. The project's Verse root is `/<plugin-guid>` (from `ListFiles("")`).
+- Each MCP call costs ~1 editor frame; a background (unfocused) editor runs ~3 FPS → ~330 ms per call. Batch big builds with
+  `uefn sg build` (one `execute_tool_script` round-trip).
+
 ## 9. What the agent cannot do (don't burn time)
 - Create/edit prefab assets; link device references; drive the editor UI.
 - Computer use can't find the UEFN window by any name ("UEFN", "Unreal Editor for Fortnite", exe name).

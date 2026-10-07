@@ -253,6 +253,110 @@ def apply(spec, parent_path=None, prune=False, log=print, scene=None):
     return stats
 
 
+# ---------------------------------------------------------------- spec prefabs
+#
+# UEFN has no tool to create prefab assets, so templates live in JSON:
+#   template  = a spec (above) whose root is the "prefab root"
+#   instances = sidecar <template>.instances.json: {"<Parent/Name>": {"at":..,"rot":..,"scale":..,"overrides":{...}}}
+#   overrides = {"Bulb": {"sphere_light_component": {"Intensity": 400}}, "": {"lamp_toggle_component": {...}}}
+#               keys are child paths relative to the instance root ("" = root itself)
+# `stamp` creates/updates one instance and records it; `propagate` re-applies the template to every recorded
+# instance, so template edits flow to all instances while each keeps its overrides.
+
+def _node_at(spec, rel):
+    n = spec
+    for part in [p for p in rel.split("/") if p]:
+        kids = {c["name"]: c for c in _expand(n.get("children") or [])}
+        if part not in kids:
+            raise KeyError(f"override path '{rel}': no child '{part}' in template")
+        # materialise expanded repeats so the override lands on the concrete node
+        n["children"] = list(kids.values())
+        n = kids[part]
+    return n
+
+
+def with_overrides(template, name, at=None, rot=None, scale=None, overrides=None):
+    spec = json.loads(json.dumps(template))
+    spec["name"] = name
+    if at is not None:
+        spec["at"] = list(at)
+    if rot is not None:
+        spec["rot"] = list(rot)
+    if scale is not None:
+        spec["scale"] = scale
+    for rel, comps_ in (overrides or {}).items():
+        node = _node_at(spec, rel)
+        node.setdefault("components", {})
+        for cname, props in comps_.items():
+            node["components"].setdefault(cname, {})
+            node["components"][cname] = dict(node["components"][cname] or {}, **props)
+    return spec
+
+
+def sidecar(template_path):
+    return template_path[:-5] + ".instances.json" if template_path.endswith(".json") else template_path + ".instances.json"
+
+
+def load_instances(template_path):
+    p = sidecar(template_path)
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
+def stamp(template_path, inst_path, at=None, rot=None, scale=None, overrides=None, log=print):
+    with open(template_path, encoding="utf-8") as f:
+        template = json.load(f)
+    insts = load_instances(template_path)
+    rec = insts.get(inst_path, {})
+    if at is not None:
+        rec["at"] = list(at)
+    if rot is not None:
+        rec["rot"] = list(rot)
+    if scale is not None:
+        rec["scale"] = scale
+    if overrides:
+        merged = rec.get("overrides", {})
+        for rel, cs in overrides.items():
+            for cname, props in cs.items():
+                merged.setdefault(rel, {}).setdefault(cname, {}).update(props)
+        rec["overrides"] = merged
+    parent, _, name = inst_path.rpartition("/")
+    spec = with_overrides(template, name, rec.get("at"), rec.get("rot"), rec.get("scale"), rec.get("overrides"))
+    st = apply(spec, parent or None, log=log)
+    insts[inst_path] = rec
+    with open(sidecar(template_path), "w", encoding="utf-8") as f:
+        json.dump(insts, f, indent=1)
+    return st
+
+
+def propagate(template_path, prune=False, log=print):
+    with open(template_path, encoding="utf-8") as f:
+        template = json.load(f)
+    total = {"created": 0, "updated": 0, "deleted": 0, "instances": 0}
+    scene = Scene()
+    for inst_path, rec in load_instances(template_path).items():
+        parent, _, name = inst_path.rpartition("/")
+        spec = with_overrides(template, name, rec.get("at"), rec.get("rot"), rec.get("scale"), rec.get("overrides"))
+        st = apply(spec, parent or None, prune=prune, log=log, scene=scene)
+        for k in st:
+            total[k] += st[k]
+        total["instances"] += 1
+    return total
+
+
+def parse_override(s):
+    """'Bulb.sphere_light_component.Intensity=400' -> ('Bulb', comp, prop, value); root: '.lamp_toggle_component.X=1'"""
+    lhs, _, val = s.partition("=")
+    rel, comp, prop = lhs.rsplit(".", 2) if lhs.count(".") >= 2 else ("",) + tuple(lhs.split(".", 1))
+    try:
+        v = json.loads(val)
+    except ValueError:
+        v = val
+    return rel.replace(".", "/"), comp, prop, v
+
+
 def dump(scene, ent, with_props=False):
     lx = local(scene, ent)
     n = {"name": short(ent["displayName"]), "at": [round(v, 3) for v in lx.loc]}
