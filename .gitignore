@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 art_out/
 sid.txt
+viewport.png
+call_image_*.png

@@ -1,0 +1,6 @@
+{"name": "VFXDemo", "at": [0, -2600, 400], "children": [
+  {"name": "Fountain",  "at": [-450, 0, 0],  "components": {"SGKit-VFX-NS_SG_Fountain": {}}},
+  {"name": "Burst",     "at": [-150, 0, 150], "components": {"SGKit-VFX-NS_SG_Burst": {}}},
+  {"name": "Explosion", "at": [150, 0, 100], "components": {"SGKit-VFX-NS_SG_Explosion": {}}},
+  {"name": "Confetti",  "at": [450, 0, 150], "components": {"SGKit-VFX-NS_SG_Confetti": {}}}
+]}

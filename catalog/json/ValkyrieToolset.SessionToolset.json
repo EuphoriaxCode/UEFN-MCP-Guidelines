@@ -1,0 +1,278 @@
+{
+ "name": "ValkyrieToolset.SessionToolset",
+ "version": "1.0",
+ "description": "Drives the UEFN play-in-client play-test loop: start and stop a session, push content changes to the\nconnected server, and start, stop, and inspect the in-game match.",
+ "tools": [
+  {
+   "description": "Disconnect from and tear down the active play-in-client session.",
+   "name": "ValkyrieToolset.SessionToolset.StopSession",
+   "inputSchema": {
+    "type": "object"
+   }
+  },
+  {
+   "description": "Stop the running in-game match on the connected server.",
+   "name": "ValkyrieToolset.SessionToolset.StopGame",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetAsyncOutcome",
+      "enum": [
+       "Failed",
+       "Completed",
+       "StillRunning"
+      ],
+      "description": "Whether the operation has completed or is still running."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Upload the open project and launch a play-in-client session.",
+   "name": "ValkyrieToolset.SessionToolset.StartSession",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "description": "When set, launches via Play From Here: starts a match and spawns the player at this position once content finishes loading.",
+      "default": null,
+      "title": "Vector",
+      "type": "object",
+      "properties": {
+       "x": {
+        "type": "number"
+       },
+       "y": {
+        "type": "number"
+       },
+       "z": {
+        "type": "number"
+       }
+      },
+      "required": [
+       "x",
+       "y",
+       "z"
+      ]
+     },
+     "rotation": {
+      "description": "Spawn orientation applied with Location; ignored when Location is unset.",
+      "default": null,
+      "title": "Rotator",
+      "type": "object",
+      "properties": {
+       "pitch": {
+        "type": "number",
+        "description": "Pitch (degrees) around Y axis"
+       },
+       "yaw": {
+        "type": "number",
+        "description": "Yaw (degrees) around Z axis"
+       },
+       "roll": {
+        "type": "number",
+        "description": "Roll (degrees) around X axis"
+       }
+      },
+      "required": [
+       "pitch",
+       "yaw",
+       "roll"
+      ]
+     }
+    }
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetAsyncOutcome",
+      "enum": [
+       "Failed",
+       "Completed",
+       "StillRunning"
+      ],
+      "description": "Whether the operation has completed or is still running."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Start the in-game match on the connected server.",
+   "name": "ValkyrieToolset.SessionToolset.StartGame",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetAsyncOutcome",
+      "enum": [
+       "Failed",
+       "Completed",
+       "StillRunning"
+      ],
+      "description": "Whether the operation has completed or is still running."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Re-send modified project data to the connected server.",
+   "name": "ValkyrieToolset.SessionToolset.PushChanges",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "bVerseOnly": {
+      "type": "boolean",
+      "description": "Send only modified Verse source, skipping the asset cook a full push performs; much faster, so prefer it when only Verse changed.",
+      "default": false
+     }
+    }
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetAsyncOutcome",
+      "enum": [
+       "Failed",
+       "Completed",
+       "StillRunning"
+      ],
+      "description": "Whether the operation has completed or is still running."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Get the connection status of the play-in-client session.",
+   "name": "ValkyrieToolset.SessionToolset.GetSessionStatus",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetSessionStatus",
+      "enum": [
+       "Disconnected",
+       "Connecting",
+       "Reconnecting",
+       "Connected",
+       "UpdatingContent"
+      ],
+      "description": "The current session connection status."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Get the state of the in-game match on the connected server.",
+   "name": "ValkyrieToolset.SessionToolset.GetGameState",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "title": "ESessionToolsetGameState",
+      "enum": [
+       "CanStart",
+       "Running",
+       "Unconnected"
+      ],
+      "description": "The current match state."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Search the launched client's log for a pattern, case-insensitively.",
+   "name": "ValkyrieToolset.SessionToolset.GetClientLogEntries",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "pattern": {
+      "type": "string",
+      "description": "A regular expression matched against each line (e.g. \"frame [0-9]+\")."
+     },
+     "maxResults": {
+      "description": "Maximum matches to return; unset means unlimited.",
+      "default": null,
+      "type": "integer"
+     },
+     "startLine": {
+      "type": "integer",
+      "description": "0-indexed line to start from; negative starts at the first line.",
+      "default": 0
+     }
+    },
+    "required": [
+     "pattern"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "title": "SessionToolsetClientLogEntries",
+      "description": "The matching lines in file order, plus the last line processed, for resuming a later search.",
+      "type": "object",
+      "properties": {
+       "entries": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "The matching log lines, in file order."
+       },
+       "lastEntryLine": {
+        "type": "integer",
+        "description": "Line number of the last line processed, for resuming a later search."
+       }
+      },
+      "required": [
+       "entries",
+       "lastEntryLine"
+      ]
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,663 @@
+[Verse:SceneGraph]
+    basic_interactable_component := class(interactable_component):
+        Cancel(Agent:agent)<transacts><decides>:void
+        Succeed(Agent:agent)<transacts><decides>:void
+        GetRemainingCooldownDurationAffectingAgent(Agent:agent):float
+        var<private> InteractingAgents:[]agent
+        InteractMessage(Agent:agent)<decides><reads>:message
+        @editable
+        var CanInteractMessage:message
+        @editable
+        var CannotInteractMessage:message
+        @editable
+        Cooldown:?interactable_cooldown
+        @editable
+        CooldownPerAgent:?interactable_cooldown_per_agent
+        @editable
+        SuccessLimit:?interactable_success_limit
+        @editable
+        InteractableDuration:?interactable_duration
+
+[Verse:SceneGraph]
+    interactable_component := class(component, enableable):
+        Enable():void
+        Disable():void
+        IsEnabled()<transacts><decides>:void
+        StartedEvent:listenable(agent)
+        SucceededEvent:listenable(agent)
+        CanceledEvent:listenable(agent)
+        Start(Agent:agent)<transacts><decides>:void
+        SignalStartEvent<protected>(Agent:agent)<transacts>:void
+        SignalSucceedEvent<protected>(Agent:agent)<transacts>:void
+        SignalCancelEvent<protected>(Agent:agent)<transacts>:void
+        OnStarted<protected>(Agent:agent)<transacts><decides>:void
+        CanInteract(Agent:agent)<decides><reads>:void
+        InteractMessage(Agent:agent)<decides><reads>:message
+
+[Verse:SceneGraph]
+    interactable_cooldown := class:
+        @editable
+        var Duration:float
+        var RemainingDuration:float
+        ExpiredEvent:listenable(tuple())
+
+[Verse:SceneGraph]
+    interactable_cooldown_per_agent := class:
+        @editable
+        var Duration:float
+        var<private> RemainingDuration:[agent]float
+        ExpiredEvent:listenable(agent)
+
+[Verse:SceneGraph]
+    interactable_duration := class:
+        @editable
+        var InteractDuration:float
+        @editable
+        var MaxSimultaneousInteractors:?int
+        GetRemainingInteractDurationForAgent(Agent:agent)<decides><reads>:float
+        SetRemainingInteractDurationForAgent(Agent:agent, RemainingDuration:float)<transacts>:void
+
+[Verse:SceneGraph]
+    interactable_success_limit := class:
+        var MaxSuccessfulInteractions:?int
+        var SuccessfulInteractionCount:int
+        ClearSuccessfulInteractionCount()<transacts>:void
+
+[Verse:SceneGraph]
+    camera_body := class:
+        SensorWidthMillimeters:float
+        SensorHeightMillimeters:float
+        SensorHorizontalOffsetMillimeters:float
+        SensorVerticalOffsetMillimeters:float
+        ISO:float
+        ShutterSpeed:float
+
+[Verse:SceneGraph]
+    camera_component := class(component, has_camera_modifier):
+        @editable
+        var NearClippingPlaneDistance:float
+        @editable
+        var FarClippingPlaneDistance:float
+        GetExitTransition(DestinationCamera:camera_component)<transacts><decides>:camera_transition
+        GetEnterTransition(SourceCamera:camera_component)<transacts><decides>:camera_transition
+
+[Verse:SceneGraph]
+    GlobalModifierPosition:rational
+    VisualModifierPosition:rational
+
+[Verse:SceneGraph]
+    camera_director_component := class(camera_component):
+        AddCamera(Camera:camera_component, Priority:rational)<transacts><decides>:cancelable
+
+[Verse:SceneGraph]
+    camera_lens := class:
+        FocalLengthMillimeters:float
+        FStop:float
+        SqueezeFactor:float
+        BladeCount:int
+
+[Verse:SceneGraph]
+    camera_modifier_stack := class(modifier_stack(camera_state)):
+        Evaluate(InValue:camera_state)<reads>:camera_state
+
+[Verse:SceneGraph]
+    has_camera_modifier := interface:
+        @editable
+        CameraModifiers:modifier_stack(camera_state)
+
+[Verse:SceneGraph]
+    camera_modifier := class(modifier(camera_state)):
+        Evaluate(InValue:camera_state)<reads>:camera_state
+
+[Verse:SceneGraph]
+    camera_projection_mode := enum:
+        Perspective
+        Orthographic
+
+[Verse:SceneGraph]
+    camera_state := class:
+        RenderLocation:(/Verse.org/SpatialMath:)vector3
+        RenderRotation:(/Verse.org/SpatialMath:)rotation
+        OrthographicProjectionWidth:float
+        Body:camera_body
+        Lens:camera_lens
+        ProjectionMode:camera_projection_mode
+        PhysicalCameraWeight:float
+        NearClippingPlaneDistance:float
+        FarClippingPlaneDistance:float
+
+[Verse:SceneGraph]
+    camera_transition_initial_orientation := enum:
+        PreviousYawPitch
+        PreviousAbsoluteTarget
+        PreviousRelativeTarget
+
+[Verse:SceneGraph]
+    camera_transition := class:
+        @editable
+        Blend:camera_mode_blend
+        @editable
+        Duration:float
+
+[Verse:SceneGraph]
+    camera_mode_blend := class:
+
+[Verse:SceneGraph]
+    camera_mode_blend_pop := class(camera_mode_blend):
+
+[Verse:SceneGraph]
+    camera_mode_blend_linear := class(camera_mode_blend):
+
+[Verse:SceneGraph]
+    camera_mode_blend_smoothstep := class(camera_mode_blend):
+
+[Verse:SceneGraph]
+    camera_mode_blend_smootherstep := class(camera_mode_blend):
+
+[Verse:SceneGraph]
+    camera_mode_blend_orbit := class(camera_mode_blend):
+        DrivingBlend:camera_mode_blend
+
+[Verse:SceneGraph]
+    orthographic_camera_component := class(camera_component):
+        @editable
+        var OrthographicProjectionWidth:float
+
+[Verse:SceneGraph]
+    perspective_camera_component := class(camera_component):
+        @editable
+        var FieldOfViewDegrees:float
+
+[Verse:SceneGraph]
+    physical_camera_component := class(camera_component):
+        var Body:camera_body
+        var Lens:camera_lens
+
+[Verse:SceneGraph]
+    skeletal_animation := class(modifier(skeleton)):
+        Evaluate(InValue:skeleton)<reads>:skeleton
+
+[Verse:SceneGraph]
+    play_skeletal_animation_result := struct:
+        Animation:skeletal_animation
+        Easeable:easeable
+
+[Verse:SceneGraph]
+    (Entity:entity).PlaySkeletalAnimation(Animation:skeletal_animation, ?EaseInWindow:easing_window, ?EaseOutWindow:easing_window)<transacts><decides>:play_skeletal_animation_result
+
+[Verse:SceneGraph]
+    skeleton := class:
+
+[Verse:SceneGraph]
+    easing_window := struct:
+        (/Verse.org/SceneGraph/easing_window:)Easing:type {_(:float)<reads>:float}
+        @editable
+        Duration:float
+        @editable
+        Offset:float
+
+[Verse:SceneGraph]
+    easeable := interface(cancelable):
+        (/Verse.org/SceneGraph/easeable:)EaseOut()<transacts>:void
+        (/Verse.org/SceneGraph/easeable:)EaseOut(EaseOutWindow:easing_window)<transacts>:void
+
+[Verse:SceneGraph]
+    (InEntity:entity).FindDescendantEntities(entity_type:castable_subtype(entity))<transacts>:generator(entity_type)
+    (InEntity:entity).FindDescendantEntitiesWithComponent(component_type:castable_subtype(component))<transacts>:generator(entity)
+    (InEntity:entity).FindDescendantComponents(component_type:castable_subtype(component))<transacts>:generator(component_type)
+    (InEntity:entity).FindAncestorEntities(entity_type:castable_subtype(entity))<transacts>:generator(entity_type)
+    (InEntity:entity).FindAncestorEntitiesWithComponent(component_type:castable_subtype(component))<transacts>:generator(entity)
+    (InEntity:entity).FindAncestorComponents(component_type:castable_subtype(component))<transacts>:generator(component_type)
+
+[Verse:SceneGraph]
+    entity_streaming_policy := enum:
+        Spatial
+        NonSpatial
+        Persistent
+
+[Verse:SceneGraph]
+    children_streaming_policy := enum:
+        Atomic
+        Discrete
+
+[Verse:SceneGraph]
+    capsule_light_component := class(light_component):
+        var Intensity:float
+        var AttenuationRadius:?float
+        var SourceRadius:float
+        var SourceLength:float
+
+[Verse:SceneGraph]
+    collision_interaction := enum:
+        Ignore
+        Overlap
+        Block
+
+[Verse:SceneGraph]
+    collision_channel := class:
+
+[Verse:SceneGraph]
+    collision_channel_to_interaction := type {_(:collision_channel):collision_interaction}
+
+[Verse:SceneGraph]
+    collision_profile := class:
+        Channel:collision_channel
+        GetChannelInteraction:collision_channel_to_interaction
+
+[Verse:SceneGraph/CollisionChannels]
+        stationary := class(collision_channel):
+
+[Verse:SceneGraph/CollisionChannels]
+        dynamic := class(collision_channel):
+
+[Verse:SceneGraph/CollisionChannels]
+        avatar := class(collision_channel):
+
+[Verse:SceneGraph/CollisionChannels]
+        visibility := class(collision_channel):
+
+[Verse:SceneGraph/CollisionChannels]
+        camera := class(collision_channel):
+
+[Verse:SceneGraph/CollisionChannels]
+        physics := class(collision_channel):
+
+[Verse:SceneGraph/CollisionProfiles]
+        StationaryIgnoreAll:collision_profile
+        StationaryOverlapAll:collision_profile
+        StationaryBlockAll:collision_profile
+        DynamicIgnoreAll:collision_profile
+        DynamicOverlapAll:collision_profile
+        DynamicBlockAll:collision_profile
+        StationaryBlockVisible:collision_profile
+        VisibilityOverlapAll:collision_profile
+
+[Verse:SceneGraph]
+    overlap_hit := struct:
+        SourceComponent:?component
+        SourceVolume:collision_volume
+        SourceGlobalTransform:(/Verse.org/SpatialMath:)transform
+        TargetComponent:component
+        TargetVolume:collision_element
+
+[Verse:SceneGraph]
+    sweep_hit := struct:
+        SourceComponent:?component
+        SourceVolume:collision_volume
+        SourceStartGlobalTransform:(/Verse.org/SpatialMath:)transform
+        SourceHitTranslation:(/Verse.org/SpatialMath:)vector3
+        SourceHitDistance:float
+        TargetComponent:component
+        TargetVolume:collision_element
+        ContactPosition:(/Verse.org/SpatialMath:)vector3
+        ContactNormal:(/Verse.org/SpatialMath:)vector3
+        ContactFaceNormal:(/Verse.org/SpatialMath:)vector3
+
+[Verse:SceneGraph]
+    collision_volume := class:
+        var Collidable:logic
+        var Queryable:logic
+        GetLocalTransform()<transacts>:(/Verse.org/SpatialMath:)transform
+        SetLocalTransform(NewLocalTransform:(/Verse.org/SpatialMath:)transform)<transacts>:void
+
+[Verse:SceneGraph]
+    collision_element := class(collision_volume):
+        var CollisionProfile:collision_profile
+
+[Verse:SceneGraph]
+    collision_capsule := class(collision_element):
+        var Radius:float
+        var Length:float
+
+[Verse:SceneGraph]
+    collision_sphere := class(collision_element):
+        var Radius:float
+
+[Verse:SceneGraph]
+    collision_point := class(collision_element):
+
+[Verse:SceneGraph]
+    collision_box := class(collision_element):
+        var Extents:(/Verse.org/SpatialMath:)vector3
+
+[Verse:SceneGraph]
+    directional_light_component := class(light_component):
+        var Illuminance:float
+        var SourceAngleDegrees:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        easing_function := class:
+            Evaluate(Input:float):float
+
+[Verse:SceneGraph/KeyframedMovement]
+        cubic_bezier_easing_function := class(easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+            Evaluate(Input:float):float
+
+[Verse:SceneGraph/KeyframedMovement]
+        linear_easing_function := class(cubic_bezier_easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        ease_cubic_bezier_easing_function := class(cubic_bezier_easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        ease_in_cubic_bezier_easing_function := class(cubic_bezier_easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        ease_out_cubic_bezier_easing_function := class(cubic_bezier_easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        ease_in_out_cubic_bezier_easing_function := class(cubic_bezier_easing_function):
+            X0:float
+            Y0:float
+            X1:float
+            Y1:float
+
+[Verse:SceneGraph/KeyframedMovement]
+        keyframed_movement_playback_mode := class:
+
+[Verse:SceneGraph/KeyframedMovement]
+        oneshot_keyframed_movement_playback_mode := class(keyframed_movement_playback_mode):
+
+[Verse:SceneGraph/KeyframedMovement]
+        loop_keyframed_movement_playback_mode := class(keyframed_movement_playback_mode):
+
+[Verse:SceneGraph/KeyframedMovement]
+        pingpong_keyframed_movement_playback_mode := class(keyframed_movement_playback_mode):
+
+[Verse:SceneGraph/KeyframedMovement]
+        keyframed_movement_delta := class:
+            @editable
+            Transform:(/Verse.org/SpatialMath:)transform
+            @editable_number(float) {MinValue := option {0.000000}}
+            Duration:float
+            @editable
+            (/Verse.org/SceneGraph/KeyframedMovement/keyframed_movement_delta:)Easing:easing_function
+
+[Verse:SceneGraph/KeyframedMovement]
+        keyframed_movement_component := class(component):
+            Pause():void
+            Play():void
+            Stop():void
+            Stop(BlendOutTime:float):void
+            StoppedEvent:listenable(tuple())
+            PlayedEvent:listenable(tuple())
+            PausedEvent:listenable(tuple())
+            IsPlaying()<decides><reads>:void
+            IsPaused()<decides><reads>:void
+            var<private> Duration:?float
+            FinishedEvent:listenable(tuple())
+            SetKeyframes(RelativeKeyframes:[]keyframed_movement_delta, PlaybackMode:keyframed_movement_playback_mode):void
+            HasValidAnimation()<decides><reads>:void
+            KeyframeReachedEvent:listenable(tuple(int, logic))
+
+[Verse:SceneGraph]
+    light_component := class(component, enableable):
+        var CastShadows:logic
+        var ColorFilter:color
+        var SpecularScale:float
+        var DiffuseScale:float
+        Enable():void
+        Disable():void
+        IsEnabled()<transacts><decides>:void
+
+[Verse:SceneGraph]
+    mesh_component := class(component, enableable):
+        Enable():void
+        Disable():void
+        IsEnabled()<transacts><decides>:void
+        var Collidable:logic
+        var Queryable:logic
+        var Visible:logic
+        EntityEnteredEvent:listenable(entity)
+        EntityExitedEvent:listenable(entity)
+
+[Verse:SceneGraph]
+    particle_system_component := class(component, enableable):
+        Enable():void
+        Disable():void
+        IsEnabled()<transacts><decides>:void
+        @editable
+        var<private> Enabled:logic
+        Play():void
+        Stop():void
+        @editable
+        var<private> AutoPlay:logic
+
+[Verse:SceneGraph]
+    (Entity:entity).FindOverlapHits()<transacts>:generator(overlap_hit)
+    (Entity:entity).FindOverlapHits(GlobalTransform:(/Verse.org/SpatialMath:)transform)<transacts>:generator(overlap_hit)
+    (Entity:entity).FindOverlapHits(GlobalTransform:(/Verse.org/SpatialMath:)transform, Volume:collision_volume)<transacts>:generator(overlap_hit)
+    (Entity:entity).FindSweepHits(Displacement:(/Verse.org/SpatialMath:)vector3)<transacts>:generator(sweep_hit)
+    (Entity:entity).FindSweepHits(Displacement:(/Verse.org/SpatialMath:)vector3, StartGlobalTransform:(/Verse.org/SpatialMath:)transform)<transacts>:generator(sweep_hit)
+    (Entity:entity).FindSweepHits(Displacement:(/Verse.org/SpatialMath:)vector3, StartGlobalTransform:(/Verse.org/SpatialMath:)transform, Volume:collision_volume)<transacts>:generator(sweep_hit)
+
+[Verse:SceneGraph]
+    possessable_component := class(component):
+        var<private> Agent:?agent
+        OnEndSimulation():void
+
+[Verse:SceneGraph]
+    (InAgent:agent).GetPossessedEntities()<reads>:[]possessable_component
+    (InAgent:agent).IsEntityPossessed(PossessableComponent:possessable_component)<decides><reads>:void
+    (Entity:entity).SetPresentableToPlayers(Players:?[]player):void
+    (Entity:entity).GetPresentableToPlayers()<transacts>:?[]player
+
+[Verse:SceneGraph]
+    rect_light_component := class(light_component):
+        var Intensity:float
+        var AttenuationRadius:?float
+        var SourceWidth:float
+        var SourceHeight:float
+        var BarnDoorAngleDegrees:float
+        var BarnDoorLength:float
+
+[Verse:SceneGraph]
+    sound_component := class(component, enableable):
+        @editable
+        var<private> AutoPlay:logic
+        Play():void
+        Stop():void
+        Enable():void
+        Disable():void
+        IsEnabled()<transacts><decides>:void
+        @editable
+        var<private> Enabled:logic
+
+[Verse:SceneGraph]
+    sphere_light_component := class(light_component):
+        var Intensity:float
+        var AttenuationRadius:?float
+        var SourceRadius:float
+
+[Verse:SceneGraph]
+    spot_light_component := class(light_component):
+        var Intensity:float
+        var AttenuationRadius:?float
+        var SourceRadius:float
+        var InnerConeAngleDegrees:float
+        var OuterConeAngleDegrees:float
+
+[Verse:SceneGraph]
+    float_range := struct:
+        Minimum:float
+        @editable
+        Maximum:float
+
+[Verse:SceneGraph]
+    component := class<final_super_base>:
+        Entity:entity
+        OnAddedToScene<protected>():void
+        OnBeginSimulation<protected>():void
+        OnSimulate<protected>()<suspends>:void
+        OnEndSimulation<protected>():void
+        OnRemovingFromScene<protected>():void
+        RemoveFromEntity():void
+        IsInScene()<decides><reads>:void
+        IsSimulating()<decides><reads>:void
+        var<private> TickEvents<protected>:tick_events
+        SendDown(SceneEvent:scene_event):logic
+        OnReceive<protected>(SceneEvent:scene_event):logic
+
+[Verse:SceneGraph]
+    scene_event := interface:
+
+[Verse:SceneGraph]
+    entity := class<transacts>(has_tags):
+        GetParent()<decides><reads>:entity
+        RemoveFromParent():void
+        AddEntities(NewChildEntities:[]entity):void
+        GetEntities()<reads>:[]entity
+        GetComponent(component_type:castable_subtype(component))<decides><reads>:component_type
+        GetComponents()<reads>:[]component
+        AddComponents(Components:[]component):void
+        SendUp(SceneEvent:scene_event):logic
+        SendDown(SceneEvent:scene_event):logic
+        AddTag(Tag:tag)<transacts>:tag_key
+        RemoveTag(Key:tag_key)<transacts><decides>:void
+        RemoveAllTags(tag_type:castable_subtype(tag))<transacts><decides>:void
+        RemoveAllTagsExcept(tag_type:castable_subtype(tag))<transacts><decides>:void
+        RemoveAllTagsExcept(tag_types:[]castable_subtype(tag))<transacts><decides>:void
+        ContainsTag(tag_type:castable_subtype(tag))<decides><reads>:void
+        ContainsAllTags(tag_types:[]castable_subtype(tag))<decides><reads>:void
+        ContainsAnyTag(tag_types:[]castable_subtype(tag))<decides><reads>:void
+
+[Verse:SceneGraph]
+    entity_prefab := class:
+
+[Verse:SceneGraph]
+    (InEntity:entity).FindDescendantEntitiesWithTag(tag_type:castable_subtype(tag))<transacts>:generator(entity)
+    (InEntity:entity).FindAncestorEntitiesWithTag(tag_type:castable_subtype(tag))<transacts>:generator(entity)
+
+[Verse:SceneGraph]
+    icon_component := class(component, has_icon):
+        var Icon:texture
+        OnBeginSimulation():void
+        OnEndSimulation():void
+
+[Verse:SceneGraph]
+    origin := interface:
+        GetTransform()<transacts>:(/Verse.org/SpatialMath:)transform
+
+[Verse:SceneGraph]
+    entity_origin := class(origin):
+        @editable
+        Entity:entity
+        GetTransform()<transacts>:(/Verse.org/SpatialMath:)transform
+
+[Verse:SceneGraph]
+    rarity := class<allocates>:
+        @editable
+        Color:color
+
+[Verse:SceneGraph]
+    common_rarity := class<allocates>(rarity):
+
+[Verse:SceneGraph]
+    uncommon_rarity := class<allocates>(common_rarity):
+        Color:color
+
+[Verse:SceneGraph]
+    rare_rarity := class<allocates>(uncommon_rarity):
+        Color:color
+
+[Verse:SceneGraph]
+    epic_rarity := class<allocates>(rare_rarity):
+        Color:color
+
+[Verse:SceneGraph]
+    legendary_rarity := class<allocates>(epic_rarity):
+        Color:color
+
+[Verse:SceneGraph]
+    rarity_component := class(component):
+        var Rarity:rarity
+        OnBeginSimulation():void
+        OnEndSimulation():void
+
+[Verse:SceneGraph]
+    (InEntity:entity).GetSimulationEntity()<transacts><decides>:entity
+
+[Verse:SceneGraph]
+    stackable_component := class(component):
+        @editable_number(int) {MinValue := option {1}}
+        var<private> StackSize:int
+        @editable
+        var<private> MaxStackSize:?int
+        SetStackSize(NewStackSize:int)<transacts>:void
+        SetMaxStackSize(NewMaxStackSize:?int, ?ClampStackSize:logic)<transacts>:void
+        Split(Amount:int)<transacts><decides>:entity
+        CanMergeInto(TargetEntity:entity)<decides><reads>:void
+        MergeInto(TargetEntity:entity, ?TargetAmount:?int)<transacts><decides>:void
+        ChangeStackSizeEvent:listenable(change_stack_size_result)
+        ChangeMaxStackSizeEvent:listenable(change_max_stack_size_result)
+        OnBeginSimulation():void
+        OnEndSimulation():void
+
+[Verse:SceneGraph]
+    change_stack_size_result := class:
+        StackableComponent:stackable_component
+        PreviousStackSize:int
+        CurrentStackSize:int
+
+[Verse:SceneGraph]
+    change_max_stack_size_result := class:
+        StackableComponent:stackable_component
+        PreviousMaxStackSize:?int
+        CurrentMaxStackSize:?int
+
+[Verse:SceneGraph]
+    has_merge_rules := interface:
+        AllowMergeInto(TargetEntity:entity)<decides><reads>:void
+        OnMergeInto(TargetEntity:entity, MergeAmount:int)<transacts>:void
+
+[Verse:SceneGraph]
+    basic_stackable_component := class(stackable_component):
+        @editable
+        split_prefab_type:castable_concrete_subtype(entity)
+        Split(Amount:int)<transacts><decides>:entity
+        CanMergeInto(TargetEntity:entity)<decides><reads>:void
+
+[Verse:SceneGraph]
+    tick_events := class:
+        PrePhysics:execution_listenable
+        PostPhysics:execution_listenable
+
+[Verse:SceneGraph]
+    transform_component := class(component):
+        var GlobalTransform:(/Verse.org/SpatialMath:)transform
+        var LocalTransform:(/Verse.org/SpatialMath:)transform
+        var Origin:?origin
+
+[Verse:SceneGraph]
+    (InEntity:entity).GetGlobalTransform()<transacts>:(/Verse.org/SpatialMath:)transform
+    (InEntity:entity).GetLocalTransform()<transacts>:(/Verse.org/SpatialMath:)transform
+    (InEntity:entity).GetOrigin()<transacts><decides>:origin
+    (InEntity:entity).SetGlobalTransform(NewGlobalTransform:(/Verse.org/SpatialMath:)transform)<transacts>:void
+    (InEntity:entity).SetLocalTransform(NewLocalTransform:(/Verse.org/SpatialMath:)transform)<transacts>:void
+    (InEntity:entity).SetOrigin(NewOrigin:origin)<transacts>:void
+    (InEntity:entity).ResetOrigin()<transacts>:void
+
+[Verse:SceneGraph]
+    execution_listenable := class(listenable(float)):
+        Await()<suspends>:float
+        Subscribe(Callback:type {_(:float):void})<transacts>:cancelable

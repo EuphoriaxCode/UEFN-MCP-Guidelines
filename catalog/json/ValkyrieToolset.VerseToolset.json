@@ -1,0 +1,446 @@
+{
+ "name": "ValkyrieToolset.VerseToolset",
+ "version": "1.0",
+ "description": "Reads, searches, edits, and compiles the Verse source of the open UEFN project. File tools act on\n.verse files addressed by their Verse path (e.g. `/<project>/Sub/Foo.verse`). That root is project-\nspecific -- it is not `/Game` -- so pass `\"\"` to address the root itself, and build paths from the ones\nthe listing and search tools return. Read-only verse digests are accessible through `/<VRI> (Name)`.",
+ "tools": [
+  {
+   "description": "Create, overwrite, or edit a region of a .verse file.",
+   "name": "ValkyrieToolset.VerseToolset.WriteFile",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to a .verse file."
+     },
+     "content": {
+      "type": "string",
+      "description": "Text to write; empty deletes the target region (or empties the file). No separator is inserted around the written region, so include a leading \"\\n\" when starting a new line."
+     },
+     "span": {
+      "description": "What to write. Unset overwrites the whole file. A span replaces that region of an existing file; a zero-width span inserts without replacing (an end-of-file span therefore appends).",
+      "default": null,
+      "title": "VerseToolsetSourceSpan",
+      "type": "object",
+      "properties": {
+       "startLine": {
+        "type": "integer"
+       },
+       "startCharacter": {
+        "type": "integer"
+       },
+       "endLine": {
+        "type": "integer"
+       },
+       "endCharacter": {
+        "type": "integer"
+       }
+      },
+      "required": [
+       "startLine",
+       "startCharacter",
+       "endLine",
+       "endCharacter"
+      ]
+     },
+     "bCreateIfMissing": {
+      "type": "boolean",
+      "description": "Create the file (and parent directories) when it does not exist. Applies to a whole-file write or an end-of-file append, not to a region replace."
+     }
+    },
+    "required": [
+     "path",
+     "content",
+     "bCreateIfMissing"
+    ]
+   }
+  },
+  {
+   "description": "Replace OldString with NewString in a .verse file.",
+   "name": "ValkyrieToolset.VerseToolset.Replace",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to a .verse file."
+     },
+     "oldString": {
+      "type": "string",
+      "description": "Existing text to find."
+     },
+     "newString": {
+      "type": "string",
+      "description": "Replacement text."
+     },
+     "bReplaceAll": {
+      "type": "boolean",
+      "description": "Replace every occurrence. When false, OldString must occur exactly once.",
+      "default": false
+     }
+    },
+    "required": [
+     "path",
+     "oldString",
+     "newString"
+    ]
+   }
+  },
+  {
+   "description": "Read a .verse file.",
+   "name": "ValkyrieToolset.VerseToolset.ReadFile",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to a .verse file."
+     },
+     "span": {
+      "description": "Region to read. Unset reads the whole file. Out-of-range positions are clamped.",
+      "default": null,
+      "title": "VerseToolsetSourceSpan",
+      "type": "object",
+      "properties": {
+       "startLine": {
+        "type": "integer"
+       },
+       "startCharacter": {
+        "type": "integer"
+       },
+       "endLine": {
+        "type": "integer"
+       },
+       "endCharacter": {
+        "type": "integer"
+       }
+      },
+      "required": [
+       "startLine",
+       "startCharacter",
+       "endLine",
+       "endCharacter"
+      ]
+     }
+    },
+    "required": [
+     "path"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "string",
+      "description": "The file's text, or the text within Span when one is given."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Move/rename a .verse file, or a directory whose subtree contains only .verse files.",
+   "name": "ValkyrieToolset.VerseToolset.Move",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "sourcePath": {
+      "type": "string",
+      "description": "Source path. A file source (and its dest) must be a .verse file; a directory source's subtree must contain no non-.verse file."
+     },
+     "destPath": {
+      "type": "string",
+      "description": "Destination; must not already exist; parent must exist; may not be inside a directory source."
+     }
+    },
+    "required": [
+     "sourcePath",
+     "destPath"
+    ]
+   }
+  },
+  {
+   "description": "List a directory's .verse files and subdirectories (other files are omitted).",
+   "name": "ValkyrieToolset.VerseToolset.ListFiles",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Directory path to list. An empty path (\"\") lists the project's own top-level Verse package plus the read-only generated digest packages it depends on, each as a directory entry."
+     },
+     "bRecursive": {
+      "type": "boolean",
+      "description": "Descend into subdirectories."
+     }
+    },
+    "required": [
+     "path",
+     "bRecursive"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "VerseToolsetFileEntry",
+       "type": "object",
+       "properties": {
+        "name": {
+         "type": "string",
+         "description": "The entry's path."
+        },
+        "type": {
+         "type": "string",
+         "title": "EVerseToolsetFileEntryType",
+         "enum": [
+          "File",
+          "Directory"
+         ],
+         "description": "File or directory."
+        }
+       },
+       "required": [
+        "name",
+        "type"
+       ]
+      },
+      "description": "The directory's .verse files and subdirectories."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Search .verse files for a pattern.",
+   "name": "ValkyrieToolset.VerseToolset.Grep",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "pattern": {
+      "type": "string",
+      "description": "Text to find. A literal substring, matched case-insensitively \u2014 unless it is wrapped in '/' (e.g. \"/foo.*bar/\"), in which case the text between the slashes is a per-line, case-sensitive regular expression (use an inline \"(?i)\" for case-insensitive regex)."
+     },
+     "pathGlob": {
+      "type": "string",
+      "description": "Glob restricting which files are searched (\"\" = every .verse file ListFiles can reach). '*' and '?' match within a single path segment; a '**' segment matches across directories. A bare \"*\" will not match anything as there are no top-level files; lead with a '**' segment to match .verse files at any depth."
+     },
+     "maxResults": {
+      "description": "Maximum matches to return; unset means unlimited.",
+      "default": null,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "pattern",
+     "pathGlob"
+    ]
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "VerseToolsetGrepMatch",
+       "type": "object",
+       "properties": {
+        "filePath": {
+         "type": "string",
+         "description": "Path to the file the match was found in."
+        },
+        "span": {
+         "title": "VerseToolsetSourceSpan",
+         "description": "Span of the matched substring. Matches are single-line, so StartLine == EndLine and the span\nis [StartCharacter, EndCharacter) on that line.",
+         "type": "object",
+         "properties": {
+          "startLine": {
+           "type": "integer"
+          },
+          "startCharacter": {
+           "type": "integer"
+          },
+          "endLine": {
+           "type": "integer"
+          },
+          "endCharacter": {
+           "type": "integer"
+          }
+         },
+         "required": [
+          "startLine",
+          "startCharacter",
+          "endLine",
+          "endCharacter"
+         ]
+        },
+        "lineText": {
+         "type": "string",
+         "description": "Full text of the matching line."
+        }
+       },
+       "required": [
+        "filePath",
+        "span",
+        "lineText"
+       ]
+      },
+      "description": "One match per matching line, in file then line order."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  },
+  {
+   "description": "Delete a .verse file, or a directory whose subtree contains only .verse files.",
+   "name": "ValkyrieToolset.VerseToolset.Delete",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to delete. A file path must be a .verse file; a directory's subtree must contain no non-.verse file. The workspace root is rejected."
+     },
+     "bRecursive": {
+      "type": "boolean",
+      "description": "Delete a non-empty directory recursively."
+     }
+    },
+    "required": [
+     "path",
+     "bRecursive"
+    ]
+   }
+  },
+  {
+   "description": "Create a directory, including any missing parent directories.",
+   "name": "ValkyrieToolset.VerseToolset.CreateDirectory",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Directory path to create."
+     }
+    },
+    "required": [
+     "path"
+    ]
+   }
+  },
+  {
+   "description": "Copy a .verse file, or a directory whose subtree contains only .verse files.",
+   "name": "ValkyrieToolset.VerseToolset.Copy",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "sourcePath": {
+      "type": "string",
+      "description": "Source path. A file source (and its dest) must be a .verse file; a directory source's subtree must contain no non-.verse file."
+     },
+     "destPath": {
+      "type": "string",
+      "description": "Destination; must not already exist; parent must exist; may not be inside a directory source."
+     },
+     "bRecursive": {
+      "type": "boolean",
+      "description": "Required (true) when the source is a directory."
+     }
+    },
+    "required": [
+     "sourcePath",
+     "destPath",
+     "bRecursive"
+    ]
+   }
+  },
+  {
+   "description": "Compile all Verse code in the project.",
+   "name": "ValkyrieToolset.VerseToolset.BuildAll",
+   "inputSchema": {
+    "type": "object"
+   },
+   "outputSchema": {
+    "type": "object",
+    "properties": {
+     "returnValue": {
+      "type": "array",
+      "items": {
+       "title": "VerseToolsetDiagnostic",
+       "type": "object",
+       "properties": {
+        "severity": {
+         "type": "string",
+         "title": "EVerseToolsetDiagnosticSeverity",
+         "enum": [
+          "Error",
+          "Warning",
+          "Information",
+          "Hint"
+         ],
+         "description": "Severity of the diagnostic."
+        },
+        "code": {
+         "type": "integer",
+         "description": "Diagnostic reference code; 0 when none."
+        },
+        "message": {
+         "type": "string",
+         "description": "Human-readable message."
+        },
+        "filePath": {
+         "type": "string",
+         "description": "Path to the file the diagnostic refers too, as a virtual Verse path (a compiler path outside the project is reported as-is)."
+        },
+        "span": {
+         "title": "VerseToolsetSourceSpan",
+         "description": "Source span of the diagnostic within FilePath.",
+         "type": "object",
+         "properties": {
+          "startLine": {
+           "type": "integer"
+          },
+          "startCharacter": {
+           "type": "integer"
+          },
+          "endLine": {
+           "type": "integer"
+          },
+          "endCharacter": {
+           "type": "integer"
+          }
+         },
+         "required": [
+          "startLine",
+          "startCharacter",
+          "endLine",
+          "endCharacter"
+         ]
+        }
+       },
+       "required": [
+        "severity",
+        "code",
+        "message",
+        "filePath",
+        "span"
+       ]
+      },
+      "description": "The build diagnostics; no Error-severity entry means the build succeeded."
+     }
+    },
+    "required": [
+     "returnValue"
+    ]
+   }
+  }
+ ]
+}
